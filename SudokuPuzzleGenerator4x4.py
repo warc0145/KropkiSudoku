@@ -389,23 +389,9 @@ depth first search approach.
 It also has functions maximum_kropki(board_list) and minimum_kropki(board_list) which determine the puzzles in the list with the maximum and
 minimum number of possible Kropki dots.
 
-Finally, all_krokpi_numbers has produced the following dictionary where the key is the number of kropki dots, and the value is the number of
+Next, all_krokpi_numbers has produced the following dictionary where the key is the number of kropki dots, and the value is the number of
 solutions with that number of kropki dots, covering all 4x4 solutions: {16: 136, 18: 64, 15: 64, 12: 8, 14: 16}
 
-Where am I going:
-Now, I want to be able to explore the uniqueness of the Kropki dot arrangements to see if a given arrangement can represent a unique solution.
-I might do this by first comparing the 8 minimum puzzles. Python makes list comparisons very simple, including lists of lists, so I can simply use
-the equality operator to check for repeats... Aditionally, I could try to implement a dictionary that counts the number of each arrangement of 
-Kropki dots.
-
-Another question to consider: How many puzzles / what kinds of puzzles have a unique arrangement of Kropki dots? I should think about the cases
-in which a Kropki dot could be black or white, and how this effects the uniqueness of the solution based on the arrangement, if it is not unique
-given the current set up. Maybe I should allow for a "grey" Kropki dot for between cells with a 1 and 2.
-
-
-
-The program should also be close to being able to find all solutions given any start state, not just a blank board. I should only need to add
-a strategy to keep track of which clues cannot be turned back into zeroes (clues given in the start state). Likely if I record the starting 
-board along with the current board, I can check if a clue is in the start board before reverting it or entering the while loop to guess that 
-position's value.
+Finall, I also explore the uniqueness of Kropki Dot Arrangements, and believe that all 4x4 solutions could be produced through a unique arrangement
+(i.e. that given an arrangement with no number clues, it can be completed to exactly one solution, and that this can be done with all 288 solutions).
 '''
