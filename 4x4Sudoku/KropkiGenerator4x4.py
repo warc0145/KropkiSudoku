@@ -148,9 +148,9 @@ def minimum_kropki(board_list):
 # minimum_kropki(solutions)
 
 def all_kropki_numbers(board_list):
-  '''
-  Returns a dictionary counting all Kropki arrangements, where the key is the number of dots and the value is the number of puzzles with that many dots
-  '''
+    '''
+    Returns a dictionary counting all Kropki arrangements, where the key is the number of dots and the value is the number of puzzles with that many dots
+    '''
     kropki_numbers = dict()
 
     for board in board_list:
