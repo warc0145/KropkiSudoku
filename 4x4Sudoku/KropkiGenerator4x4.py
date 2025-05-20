@@ -10,7 +10,7 @@ These functions allow me to produce a Kropki Arrangement for all 4x4 Sudoku boar
 how many 4x4 solutions have a unique Kropki Arrangement, what is the highest and lowest number of circles in a Kropkri Arrangement,
 and how many puzzles have a given number of circles in a Kropki Arrangement,
 '''
-from SudokuPuzzleGenerator4x4.py import solutions
+from SudokuPuzzleGenerator4x4 import solutions
 
 print(solutions)
 
@@ -96,7 +96,7 @@ def maximum_kropki(board_list):
     print_board(best_board)
 
 
-# maximum_kropki(all_boards)
+# maximum_kropki(solutions)
 
 
 def minimum_kropki(board_list):
@@ -145,7 +145,7 @@ def minimum_kropki(board_list):
     print("Printing board...")
     print_board(best_board)
 
-# minimum_kropki(all_boards)
+# minimum_kropki(solutions)
 
 def all_kropki_numbers(board_list):
   '''
@@ -180,7 +180,7 @@ def all_kropki_numbers(board_list):
 
     print(kropki_numbers)
 
-# all_kropki_numbers(all_boards)
+# all_kropki_numbers(solutions)
 
 kropki_solutions = []
 def all_kropki_solutions(board_list):
@@ -201,5 +201,5 @@ def all_kropki_solutions(board_list):
             print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
 
-# all_kropki_solutions(all_boards)
+# all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
