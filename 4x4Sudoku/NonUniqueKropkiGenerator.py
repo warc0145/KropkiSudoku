@@ -49,9 +49,9 @@ def find_vertical_kropki_dots(board):
     return vertical_dots
 
 def all_kropki_numbers(board_list):
-  '''
-  Returns a dictionary counting all Kropki arrangements, where the key is the number of dots and the value is the number of puzzles with that many dots
-  '''
+    '''
+    Returns a dictionary counting all Kropki arrangements, where the key is the number of dots and the value is the number of puzzles with that many dots
+    '''
     kropki_numbers = dict()
 
     for board in board_list:
