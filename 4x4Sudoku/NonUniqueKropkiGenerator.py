@@ -16,7 +16,7 @@ I removed the max and min functions from this version because they are not neede
 '''
 from SudokuPuzzleGenerator4x4 import solutions
 
-print(solutions)
+# print(solutions)
 
 def find_horizontal_kropki_dots(board):
     '''
