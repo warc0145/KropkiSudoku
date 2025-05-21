@@ -10,7 +10,7 @@ These functions allow me to produce a Kropki Arrangement for all 4x4 Sudoku boar
 how many 4x4 solutions have a unique Kropki Arrangement, what is the highest and lowest number of circles in a Kropkri Arrangement,
 and how many puzzles have a given number of circles in a Kropki Arrangement,
 '''
-from SudokuPuzzleGenerator4x4 import solutions
+from SudokuPuzzleGenerator4x4 import solutions, print_board
 
 print(solutions)
 
