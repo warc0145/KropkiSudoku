@@ -14,7 +14,7 @@ This version is a copy of KropkiGenerator4x4.py, but it marks the space between 
 This leads to 8 arrangements being non-unique, and this version is used for the NonUniqueGenerator4x4.py
 I removed the max and min functions from this version because they are not needed.
 '''
-from SudokuPuzzleGenerator4x4 import solutions
+from SudokuPuzzleGenerator4x4 import solutions, print_board
 
 # print(solutions)
 
