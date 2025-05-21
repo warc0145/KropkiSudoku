@@ -102,5 +102,5 @@ def all_kropki_solutions(board_list):
             print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
 
-# all_kropki_solutions(solutions)
+all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
