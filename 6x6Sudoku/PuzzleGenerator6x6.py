@@ -199,7 +199,7 @@ def find_puzzles(current_board, current_row, current_column):
 
 solutions = [] # This will be a list of two dimensional arrays, representing all possible solutions from a given starting point (currently only a blank board)
 
-blank_board = [[0,0,0,0,0,0], [0,0,0,0,0,0,], [0,0,0,0,0,0], [0,0,0,0,0,0]]
+blank_board = [[0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]]
 
 
 
