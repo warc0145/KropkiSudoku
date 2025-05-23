@@ -144,7 +144,7 @@ def find_puzzles(current_board, current_row, current_column):
     """
     A recursive Depth-First Search function to find all 4x4 sudoku puzzles
     """
-     print("Now in position " + str((current_row,current_column))) # Error / process check
+    print("Now in position " + str((current_row,current_column))) # Error / process check
     guess = 1
 
     while guess < 7:
@@ -158,12 +158,12 @@ def find_puzzles(current_board, current_row, current_column):
 
                 if box_valid: # Then our guess is valid!
                     current_board[current_row][current_column] = guess
-                    print(guess, "is a valid guess; current board:", current_board)
-                    print("We are in position " + str((current_row,current_column))) # Error / process check
-                    print("The board appears as:") # Error / process check
-                    print(current_board) # Error / process check
+                    # print(guess, "is a valid guess; current board:", current_board)
+                    # print("We are in position " + str((current_row,current_column))) # Error / process check
+                    # print("The board appears as:") # Error / process check
+                    # print(current_board) # Error / process check
 
-                    if current_column < 8: # move to next column
+                    if current_column < 5: # move to next column
                         print("Moving to next column!") # Error / process check
                         find_puzzles(current_board, current_row, current_column+1)
                         
@@ -176,7 +176,7 @@ def find_puzzles(current_board, current_row, current_column):
                             print("current board", current_board, "is valid. Appending...")
                             
                             solutions.append([row.copy() for row in current_board])
-                            print("Solution appended, length:", len(solutions)) # Error / process check
+                            # print("Solution appended, length:", len(solutions)) # Error / process check
                             
                             # if len(solutions) == 288:
                             #     print("Solutions:", solutions)
