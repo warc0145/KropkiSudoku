@@ -51,13 +51,16 @@ def check_box(current_board, current_row, current_column, guess):
     Returns true if there is no violation and false if a violation is found
 
     The quadrants I will number as follows:
-    -------------------------
-    |   1   |   2   |   3   |
-    |       |       |       |
-    -------------------------
-    |   4   |   5   |   6   |
-    |       |       |       |
-    -------------------------
+    -----------------
+    |   1   |   2   |
+    |       |       |
+    -----------------
+    |   3   |   4   |
+    |       |       |
+    -----------------
+    |   5   |   6   |
+    |       |       |
+    -----------------
     """
     quadrant = 0
 
@@ -66,16 +69,17 @@ def check_box(current_board, current_row, current_column, guess):
     if current_row < 2:
         if current_column < 3:
             quadrant = 1
-        elif current_column < 6:
-            quadrant = 2
         else:
+            quadrant = 2
+    elif current_row < 4:
+        if current_column < 3:
             quadrant = 3
+        else:
+            quadrant = 4
     else:
         if current_column < 3:
-            quadrant = 4
-        elif current_column < 6:
             quadrant = 5
-        else:
+        else: 
             quadrant = 6
 
 
@@ -95,28 +99,28 @@ def check_box(current_board, current_row, current_column, guess):
             return False
 
     elif quadrant == 3:
-        box_vals = [current_board[0][6], current_board[0][7], current_board[0][8], 
-                    current_board[1][6], current_board[1][7], current_board[1][8]]
-        if guess in box_vals:
-            # Then the value is already present in this box, which is a violation
-            return False
-    
-    elif quadrant == 4:
         box_vals = [current_board[2][0], current_board[2][1], current_board[2][2], 
                     current_board[3][0], current_board[3][1], current_board[3][2]]
         if guess in box_vals:
             # Then the value is already present in this box, which is a violation
             return False
-    elif quadrant == 5:
+    
+    elif quadrant == 4:
         box_vals = [current_board[2][3], current_board[2][4], current_board[2][5], 
                     current_board[3][3], current_board[3][4], current_board[3][5]]
         if guess in box_vals:
             # Then the value is already present in this box, which is a violation
             return False
+    elif quadrant == 5:
+        box_vals = [current_board[4][0], current_board[4][1], current_board[4][2], 
+                    current_board[5][0], current_board[5][1], current_board[5][2]]
+        if guess in box_vals:
+            # Then the value is already present in this box, which is a violation
+            return False
 
     else: # quadrant == 6
-        box_vals = [current_board[2][6], current_board[2][7], current_board[2][8], 
-                    current_board[3][6], current_board[3][7], current_board[3][8]]
+        box_vals = [current_board[4][3], current_board[4][4], current_board[4][5], 
+                    current_board[5][3], current_board[5][4], current_board[5][5]]
         if guess in box_vals:
             # Then the value is already present in this box, which is a violation
             return False
@@ -131,9 +135,9 @@ def print_board(board):
     for row_num in range(4):
         row = board[row_num]
         if row_num % 2 == 0:
-            print("-------------------------")
+            print("-----------------")
         print("|", row[0], row[1], row[2], "|", row[3], row[4], row[5], "|", row[6], row[7], row[8], "|")
-    print("-------------------------")
+    print("-----------------")
 
 
 def find_puzzles(current_board, current_row, current_column):
@@ -195,7 +199,7 @@ def find_puzzles(current_board, current_row, current_column):
 
 solutions = [] # This will be a list of two dimensional arrays, representing all possible solutions from a given starting point (currently only a blank board)
 
-blank_board = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
+blank_board = [[0,0,0,0,0,0], [0,0,0,0,0,0,], [0,0,0,0,0,0], [0,0,0,0,0,0]]
 
 
 
