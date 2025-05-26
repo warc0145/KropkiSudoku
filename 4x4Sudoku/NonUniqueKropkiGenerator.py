@@ -83,24 +83,24 @@ def all_kropki_numbers(board_list):
 
 # all_kropki_numbers(solutions)
 
-kropki_solutions = []
+non_unique_kropki_solutions = []
 def all_kropki_solutions(board_list):
     '''
-    This function will append to the existing list, kropki_solutions, a tuple of horizontal dots and vertical dots (which are each two dimensional arrays)
-    Then, we will examine kropki_solutions to check for uniqueness by counting repeating arrangements
+    This function will append to the existing list, non_unique_kropki_solutions, a tuple of horizontal dots and vertical dots (which are each two dimensional arrays)
+    Then, we will examine non_unique_kropki_solutions to check for uniqueness by counting repeating arrangements
     '''
     non_unique_count = 0
     for board in board_list:
-        kropki_solutions.append((find_horizontal_kropki_dots(board), find_vertical_kropki_dots(board)))
+        non_unique_kropki_solutions.append((find_horizontal_kropki_dots(board), find_vertical_kropki_dots(board)))
     
-    for i in range(len(kropki_solutions)):
-        if kropki_solutions.count(kropki_solutions[i]) > 1:
+    for i in range(len(non_unique_kropki_solutions)):
+        if non_unique_kropki_solutions.count(non_unique_kropki_solutions[i]) > 1:
             non_unique_count +=1
             print("The arrangement:")
-            print(kropki_solutions[i])
-            print("Appears", kropki_solutions.count(kropki_solutions[i]), "times. Here is the current board with the arrangement:")
+            print(non_unique_kropki_solutions[i])
+            print("Appears", non_unique_kropki_solutions.count(non_unique_kropki_solutions[i]), "times. Here is the current board with the arrangement:")
             print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
 
 all_kropki_solutions(solutions)
-# print(kropki_solutions[3])
+# print(non_unique_kropki_solutions[3])
