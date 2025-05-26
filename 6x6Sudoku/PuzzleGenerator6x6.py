@@ -136,15 +136,15 @@ def print_board(board):
         row = board[row_num]
         if row_num % 2 == 0:
             print("-----------------")
-        print("|", row[0], row[1], row[2], "|", row[3], row[4], row[5], "|", row[6], row[7], row[8], "|")
+        print("|", row[0], row[1], row[2], "|", row[3], row[4], row[5], "|")
     print("-----------------")
 
-
+count_lst = [0]
 def find_puzzles(current_board, current_row, current_column):
     """
     A recursive Depth-First Search function to find all 4x4 sudoku puzzles
     """
-    print("Now in position " + str((current_row,current_column))) # Error / process check
+    # print("Now in position " + str((current_row,current_column))) # Error / process check
     guess = 1
 
     while guess < 7:
@@ -164,33 +164,24 @@ def find_puzzles(current_board, current_row, current_column):
                     # print(current_board) # Error / process check
 
                     if current_column < 5: # move to next column
-                        print("Moving to next column!") # Error / process check
+                        # print("Moving to next column!") # Error / process check
                         find_puzzles(current_board, current_row, current_column+1)
                         
                     else: # At the end of the current row
                         if current_row < 3: # Move to next row
-                            print("Moving to next row!") # Error / process check
+                            # print("Moving to next row!") # Error / process check
                             find_puzzles(current_board, current_row + 1, 0)
                         
                         else: # We are at the end of the board!
-                            print("current board", current_board, "is valid. Appending...")
+                            # print("current board", current_board, "is valid. Appending...")
                             
-                            solutions.append([row.copy() for row in current_board])
+                            # Output to tracj counting solutions found so far
+                            count_lst[0] += 1
+                            if count_lst[0] % 500000 == 0:
+                                print(count_lst[0])
+                            # solutions.append([row.copy() for row in current_board])
                             # print("Solution appended, length:", len(solutions)) # Error / process check
                             
-                            # if len(solutions) == 288:
-                            #     print("Solutions:", solutions)
-
-                            # if solutions[-1] == [[1, 2, 3, 4], [3, 4, 1, 2], [2, 1, 4, 3], [4, 3, 2, 1]]:
-                            #     print("Example solution found, searching and printing kropki dots...")
-                            #     print_board(solutions[-1])
-                            #     horiz_kropki = find_horizontal_kropki_dots(solutions[-1])
-                            #     vert_kropki = find_vertical_kropki_dots(solutions[-1])
-
-                            #     print("Horizontal:", horiz_kropki)
-                            #     print("Vertical:", vert_kropki)
-
-                                
                     # After recursively exploring all substates of this valid partial solution, backtrack to continue finding all valid solutions!
                     current_board[current_row][current_column] = 0
 
@@ -201,14 +192,5 @@ solutions = [] # This will be a list of two dimensional arrays, representing all
 
 blank_board = [[0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]]
 
-
-
-
 find_puzzles(blank_board, 0, 0) # Base call to find_puzzles, starting in the (0,0) position with a blank board (all zeroes)
-
-# for sol in solutions[:10]:
-#     print(solutions.count(sol))
-print("There are", len(solutions), "solutions")
-for i in range(10):
-  print("Solution #", i, "appears", solutions.count(solutions[i]), "time(s). This solution is:")
-  print_board(solutions[i])
+print("There are", count_lst[0], "solutions")
