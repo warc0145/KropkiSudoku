@@ -174,21 +174,19 @@ def find_puzzles(current_board, current_row, current_column):
                         
                         else: # We are at the end of the board!
                             # print("current board", current_board, "is valid. Appending...")
+                            with ("6x6Solutions.txt", "a") as f:
+                                f.write(current_board + "/\n")
                             
-                            # Output to tracj counting solutions found so far
+                            # Output to track counting solutions found so far
                             count_lst[0] += 1
                             if count_lst[0] % 500000 == 0:
                                 print(count_lst[0])
-                            # solutions.append([row.copy() for row in current_board])
-                            # print("Solution appended, length:", len(solutions)) # Error / process check
-                            
+
                     # After recursively exploring all substates of this valid partial solution, backtrack to continue finding all valid solutions!
                     current_board[current_row][current_column] = 0
 
         # We arrive here if one of the checks failed OR we've backtracked from all solutions at this point; increment guess and check new answer
         guess += 1
-
-solutions = [] # This will be a list of two dimensional arrays, representing all possible solutions from a given starting point (currently only a blank board)
 
 blank_board = [[0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]]
 
