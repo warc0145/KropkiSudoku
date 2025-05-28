@@ -55,10 +55,10 @@ def check_kropki(current_board, current_row, current_column, kropki_sol, guess):
     Will only check dots above and to the left, since cells to the right and below will not be filled yet.
     """
     # Check horizontal dot (to the left)
-    if current_col > 0:
-        k_col = current_col - 1 # Location of the dot to the left of the current position
+    if current_column > 0:
+        k_col = current_column - 1 # Location of the dot to the left of the current position
         if kropki_sol[0][current_row][k_col] == -1:
-            differece = guess - current_board[current_row][k_col]
+            difference = guess - current_board[current_row][k_col]
             if difference == 1 or difference == -1:
                 return True
             else:
@@ -72,7 +72,7 @@ def check_kropki(current_board, current_row, current_column, kropki_sol, guess):
                 return False
 
         else: # 0, so no dot, so the cells must NOT have a difference of one or quotient of 2
-            differece = guess - current_board[current_row][k_col]
+            difference = guess - current_board[current_row][k_col]
             if difference == 1 or difference == -1:
                 return False
             else:
@@ -85,31 +85,31 @@ def check_kropki(current_board, current_row, current_column, kropki_sol, guess):
     # Check vertical dots
     if current_row > 0:
         k_row = current_row - 1 # Location of the dot to the left of the current position
-        if kropki_sol[1][k_row][current_col] == -1:
-            differece = guess - current_board[k_row][current_col]
+        if kropki_sol[1][k_row][current_column] == -1:
+            difference = guess - current_board[k_row][current_column]
             if difference == 1 or difference == -1:
                 return True
             else:
                 return False
 
-        elif kropki_sol[1][k_row][current_col] == 1:
-            quotient = guess / current_board[k_row][current_col]
+        elif kropki_sol[1][k_row][current_column] == 1:
+            quotient = guess / current_board[k_row][current_column]
             if quotient == 2 or quotient == 0.5:
                 return True
             else:
                 return False
 
         else: # 0, so no dot, so the cells must NOT have a difference of one or quotient of 2
-            differece = guess - current_board[current_row][k_col]
+            difference = guess - current_board[k_row][current_column]
             if difference == 1 or difference == -1:
                 return False
             else:
-                quotient = guess / current_board[k_row][current_col]
+                quotient = guess / current_board[k_row][current_column]
                 if quotient == 2 or quotient == 0.5:
                     return False
                 else:
                     return True
-
+    return True # In the case that we are in position (0,0), there are no dots to check
 
 valid_solutions = []
 def find_puzzles_with_kropki(current_board, current_row, current_column, kropki_sol):
@@ -148,8 +148,8 @@ def find_puzzles_with_kropki(current_board, current_row, current_column, kropki_
                                 find_puzzles_with_kropki(current_board, current_row + 1, 0, kropki_sol)
                         
                             else: # We are at the end of the board!
-                                print("current board", current_board, "is valid. Appending...")
-                                valid_solutions.append(current_board)
+                                # print("current board", current_board, "is valid. Appending...")
+                                valid_solutions.append([row.copy() for row in current_board])
                             
 
                     # After recursively exploring all substates of this valid partial solution, backtrack to continue finding all valid solutions!
