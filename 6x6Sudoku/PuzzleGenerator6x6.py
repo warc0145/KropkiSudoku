@@ -168,7 +168,7 @@ def find_puzzles(current_board, current_row, current_column):
                         find_puzzles(current_board, current_row, current_column+1)
                         
                     else: # At the end of the current row
-                        if current_row < 3: # Move to next row
+                        if current_row < 5: # Move to next row
                             # print("Moving to next row!") # Error / process check
                             find_puzzles(current_board, current_row + 1, 0)
                         
