@@ -16,7 +16,7 @@ and how many puzzles have a given number of circles in a Kropki Arrangement.
 
 def find_horizontal_kropki_dots(board):
     '''
-    Searches a given board and returns a 4x3 array representing horizontal kropki dot placements (1 for black, -1 for white, 0 for no dot)
+    Searches a given board and returns a 6x5 array representing horizontal kropki dot placements (1 for black, -1 for white, 0 for no dot)
     Note, currently the circles between 1 and 2 are always black.
     '''
     horizontal_dots = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
@@ -33,7 +33,7 @@ def find_horizontal_kropki_dots(board):
 
 def find_vertical_kropki_dots(board):
     '''
-    Searches a given board and returns a 3x4 array representing vertical kropki dot placements (1 for black, -1 for white, 0 for no dot)
+    Searches a given board and returns a 5x6 array representing vertical kropki dot placements (1 for black, -1 for white, 0 for no dot)
     Note, currently the circles between 1 and 2 are always black.
     '''
     vertical_dots = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
@@ -200,6 +200,16 @@ def all_kropki_solutions(board_list):
             print("Appears", kropki_solutions.count(kropki_solutions[i]), "times. Here is the current board with the arrangement:")
             print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
+
+
+# Now read solutions.txt for first 1000 solutions and last 1000 solutions, and begin making boards
+with open('solutions.txt', 'r') as file:
+    i = 0
+    for line in file:
+        i += 1
+        if i > 10:
+            return
+        print(line)
 
 # all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
