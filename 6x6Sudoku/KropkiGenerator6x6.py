@@ -201,26 +201,22 @@ def all_kropki_solutions(board_list):
             print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
 
-board_list = []
+solutions = []
 # Now read solutions.txt for first 1000 solutions and last 1000 solutions, and begin making boards
 with open('solutions.txt', 'r') as file:
-    i = 0
-    char_count = 0
     for line in file:
-        board_list.append([]) # Insert a new solution to the board_list
-        if i < 10:
-            print(line)
-            new_line = ''
-            for char in line:
-                if char in '123456':
-                    new_line = new_line + char + ','
-                    if len(new_line) == 12: # Then we have a full row for the solution! (half of the characters are commas)
-                        board_list[i].append(new_line.split(','))
-                        new_line = ''
-        i += 1
-        print(board_list)
-                        
-                    
-                    
-# all_kropki_solutions(solutions)
+        solutions.append([]) # Insert a new solution to the solutions
+        # print(line)
+        new_line = ''
+        for char in line:
+            if char in '123456':
+                new_line = new_line + char
+                if len(new_line) == 6: # Then we have a full row for the solution!
+                    solutions[-1].append([])
+                    for num in new_line:
+                        solutions[-1][-1].append(int(num))
+                    new_line = ''
+
+             
+all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
