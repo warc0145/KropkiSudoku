@@ -114,7 +114,7 @@ def check_kropki(current_board, current_row, current_column, kropki_sol, guess):
 valid_solutions = []
 def find_puzzles_with_kropki(current_board, current_row, current_column, kropki_sol):
     """
-    A recursive Depth-First Search function to find all 4x4 sudoku puzzles
+    A recursive Depth-First Search function to find all 6x6 sudoku puzzles that are valid solutions to the Kropki arrangement, kropki_sol
     """
     # print("Now in position " + str((current_row,current_column))) # Error / process check
     guess = 1
