@@ -1,4 +1,4 @@
-"""
+'''
 Name: Dylan Warcholik
 
 File Name: BlackDiamond.py
@@ -7,7 +7,7 @@ Date Started: 7/13/2025
 
 Description:
 Narrows down all of the Kropki arrangements to a list of only those that contain a "black diamond" or a "white diamond" of dots.
-"""
+'''
 from KropkiGenerator4x4 import kropki_solutions
 from AltLatexPrinter import latex_print
 

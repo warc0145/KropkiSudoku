@@ -1,5 +1,5 @@
 
-"""
+'''
 Name: Dylan Warcholik
 
 File Name: AltLatexPrinter.py
@@ -9,7 +9,7 @@ Date Started: 5/30/2025
 Description:
 Uses previous existing Kropki Arrangements and prints it out in the form that Latex will take as two arguments.
 Takes up less lines in printing by printing the horizontal dots in one line rather than one row per line, as well as for the vertical dots.
-"""
+'''
 from KropkiGenerator4x4 import kropki_solutions
 
 def latex_print(sol):

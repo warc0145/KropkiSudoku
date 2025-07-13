@@ -1,4 +1,4 @@
-"""
+'''
 Name: Dylan Warcholik
 
 File Name: LatexPrinter.py
@@ -7,7 +7,7 @@ Date Started: 5/30/2025
 
 Description:
 Uses previous existing Kropki Arrangements and prints it out in the form that Latex will take as two arguments
-"""
+'''
 from KropkiGenerator4x4 import kropki_solutions
 
 def latex_print(sol):
