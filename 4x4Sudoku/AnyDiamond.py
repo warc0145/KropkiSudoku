@@ -26,51 +26,42 @@ for k_sol in kropki_solutions:
     if k_sol[0][0][0] == -1 and k_sol[0][1][0] == -1: # top and bottom of diamond
         if k_sol[1][0][0] == -1 and k_sol[1][0][1] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][0][1] == -1 and k_sol[0][1][1] == -1: # top and bottom of diamond
         if k_sol[1][0][1] == -1 and k_sol[1][0][2] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][0][2] == -1 and k_sol[0][1][2] == -1: # top and bottom of diamond
         if k_sol[1][0][2] == -1 and k_sol[1][0][3] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
 
     # Here, I check for diamonds in which the top is in the second row:
     elif k_sol[0][1][0] == -1 and k_sol[0][2][0] == -1: # top and bottom of diamond
         if k_sol[1][1][0] == -1 and k_sol[1][1][1] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][1][1] == -1 and k_sol[0][2][1] == -1: # top and bottom of diamond
         if k_sol[1][1][1] == -1 and k_sol[1][1][2] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][1][2] == -1 and k_sol[0][2][2] == -1: # top and bottom of diamond
         if k_sol[1][1][2] == -1 and k_sol[1][1][3] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
 
     # Here, I check for diamonds in which the top is in the third row:
     elif k_sol[0][2][0] == -1 and k_sol[0][3][0] == -1: # top and bottom of diamond
         if k_sol[1][2][0] == -1 and k_sol[1][2][1] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][2][1] == -1 and k_sol[0][3][1] == -1: # top and bottom of diamond
         if k_sol[1][2][1] == -1 and k_sol[1][2][2] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][2][2] == -1 and k_sol[0][3][2] == -1: # top and bottom of diamond
         if k_sol[1][2][2] == -1 and k_sol[1][2][3] == -1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
 
     
@@ -80,51 +71,42 @@ for k_sol in kropki_solutions:
     elif k_sol[0][0][0] == 1 and k_sol[0][1][0] == 1: # top and bottom of diamond
         if k_sol[1][0][0] == 1 and k_sol[1][0][1] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][0][1] == 1 and k_sol[0][1][1] == 1: # top and bottom of diamond
         if k_sol[1][0][1] == 1 and k_sol[1][0][2] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][0][2] == 1 and k_sol[0][1][2] == 1: # top and bottom of diamond
         if k_sol[1][0][2] == 1 and k_sol[1][0][3] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
 
     # Here, I check for diamonds in which the top is in the second row:
     elif k_sol[0][1][0] == 1 and k_sol[0][2][0] == 1: # top and bottom of diamond
         if k_sol[1][1][0] == 1 and k_sol[1][1][1] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][1][1] == 1 and k_sol[0][2][1] == 1: # top and bottom of diamond
         if k_sol[1][1][1] == 1 and k_sol[1][1][2] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][1][2] == 1 and k_sol[0][2][2] == 1: # top and bottom of diamond
         if k_sol[1][1][2] == 1 and k_sol[1][1][3] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
 
     # Here, I check for diamonds in which the top is in the third row:
     elif k_sol[0][2][0] == 1 and k_sol[0][3][0] == 1: # top and bottom of diamond
         if k_sol[1][2][0] == 1 and k_sol[1][2][1] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     elif k_sol[0][2][1] == 1 and k_sol[0][3][1] == 1: # top and bottom of diamond
         if k_sol[1][2][1] == 1 and k_sol[1][2][2] == 1: # Sides of diamond
             valid = True
-            black_diamonds_8.append(k_sol)
             count += 1
     elif k_sol[0][2][2] == 1 and k_sol[0][3][2] == 1: # top and bottom of diamond
         if k_sol[1][2][2] == 1 and k_sol[1][2][3] == 1: # Sides of diamond
             valid = True
-            diamond_list.append(k_sol)
             count += 1
     if valid:
         diamond_list.append(k_sol)
@@ -134,8 +116,8 @@ for k_sol in kropki_solutions:
 print("The number of puzzles with at least one diamond is", str(len(diamond_list)))
 
 print("Here are the puzzles without a diamond: (" + str(len(no_diamond_list)) + ")")
-for puzzle in no_diamond_list:
-    latex_print(puzzle)
+# for puzzle in no_diamond_list:
+    # latex_print(puzzle)
 
 
 for k_sol in kropki_solutions:
