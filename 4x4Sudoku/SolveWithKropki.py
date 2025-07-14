@@ -108,11 +108,11 @@ def kropki_solver(current_board, kropki_sol, current_row, current_column):
 
                         if current_column < 3: # move to next column
                     
-                            kropki_solver(current_board, kropki_sol, current_row, current_column+1)
+                            return kropki_solver(current_board, kropki_sol, current_row, current_column+1)
                         
                         else: # At the end of the current row
                             if current_row < 3: # Move to next row
-                                kropki_solver(current_board, kropki_sol, current_row + 1, 0)
+                                return kropki_solver(current_board, kropki_sol, current_row + 1, 0)
                         
                             else: # We are at the end of the board!                            
                                 solutions.append([row.copy() for row in current_board])
@@ -120,12 +120,13 @@ def kropki_solver(current_board, kropki_sol, current_row, current_column):
                     # After recursively exploring all substates of this valid partial solution, backtrack to continue finding all valid solutions!
                     current_board[current_row][current_column] = 0
         
-        # We arrive here if one of the checks failed OR we've backtracked from all solutions at this point; increment guess and check new answer
-        guess += 1
-
-
-    
-
+        # We arrive here if one of the checks failed OR we've backtracked from all solutions at this point; increment guess and check new answer 
+        # if we haven't reached the end of the board with the last guess
+        if guess == 4 and current_row == 3 and current_column == 3:
+            return solutions
+        else:
+            guess += 1
+        
 blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
-kropki_solver(blank_board, kropki_solutions[0], 0, 0)
+print(kropki_solver(blank_board, kropki_solutions[0], 0, 0))
 print(solutions)
