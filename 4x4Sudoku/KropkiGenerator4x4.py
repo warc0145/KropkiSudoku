@@ -12,7 +12,6 @@ and how many puzzles have a given number of circles in a Kropki Arrangement,
 '''
 from SudokuPuzzleGenerator4x4 import solutions, print_board
 
-print(solutions)
 
 def find_horizontal_kropki_dots(board):
     """
@@ -199,7 +198,7 @@ def all_kropki_solutions(board_list):
             print(kropki_solutions[i])
             print("Appears", kropki_solutions.count(kropki_solutions[i]), "times. Here is the current board with the arrangement:")
             print_board(board_list[i])
-    print("Total non-unique arrangements:", non_unique_count)
+    # print("Total non-unique arrangements:", non_unique_count) # It is zero!
 
 all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
