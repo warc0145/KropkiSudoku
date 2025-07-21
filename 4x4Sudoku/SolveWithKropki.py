@@ -143,9 +143,9 @@ def kropki_solver(current_board, kropki_sol, current_row, current_column, soluti
         return solutions
 
 blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
-print(kropki_solver(blank_board, kropki_solutions[0], 0, 0, []))
+# print(kropki_solver(blank_board, kropki_solutions[0], 0, 0, []))
 
 blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
 kropki_solution_eg = ([[-1, -1, -1], [-1, -1, -1], [-1, 0, -1], [-1, 0, -1]], [[0, -1, -1, 0], [-1, -1, -1, -1], [-1, 0, 0, -1]])
-print("Running to check for multiple solutions")
-print(kropki_solver(blank_board, kropki_solution_eg, 0, 0, []))
+# print("Running to check for multiple solutions")
+# print(kropki_solver(blank_board, kropki_solution_eg, 0, 0, []))
