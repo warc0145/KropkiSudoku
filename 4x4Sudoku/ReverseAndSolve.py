@@ -14,6 +14,10 @@ from SolveWithKropki import kropki_solver
 from AltLatexPrinter import latex_print
 
 def color_reverser(kropki):
+    """
+    Takes in a Kropki Arrangement and returns a new one where all existing dots have had their colors switched
+    The returned item is a tuple of two 2-dimensional arrays.
+    """
     new_kropki = ([[0,0,0],[0,0,0],[0,0,0],[0,0,0]],[[0,0,0,0],[0,0,0,0],[0,0,0,0]])
     for dot_type in range(len(kropki)):
         # Allows iterating through horizontal and vertical dots
