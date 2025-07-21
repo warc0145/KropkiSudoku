@@ -10,29 +10,43 @@ Because of the similarity of the number of puzzles with white diamonds and black
 and observe if the puzzle is still able to be solved (uniquely).
 '''
 from AnyDiamond import diamond_list, no_diamond_list, full_cell_list, no_full_cells_list
-from SolveWithKropki import blank_board, kropki_solver
+from SolveWithKropki import kropki_solver
 from AltLatexPrinter import latex_print
 
-def color_reverser(board):
-    for dot_type in range(len(board)):
+def color_reverser(kropki):
+    new_kropki = ([[0,0,0],[0,0,0],[0,0,0],[0,0,0]],[[0,0,0,0],[0,0,0,0],[0,0,0,0]])
+    for dot_type in range(len(kropki)):
         # Allows iterating through horizontal and vertical dots
-        for row in range(len(board[dot_type])):
-            for col in range(len(board[dot_type][row])):
-                if abs(board[dot_type][row][col]) == 1:
-                    board[dot_type][row][col] *= -1 
-                    # This is to say, for every dot, reverse the color
+        for row in range(len(kropki[dot_type])):
+            for col in range(len(kropki[dot_type][row])):
+                if abs(kropki[dot_type][row][col]) == 1:
+                    new_kropki[dot_type][row][col] = kropki[dot_type][row][col] * -1 
+                    # This is to say, for every dot, reverse the color and put that in new_kropki
+    return new_kropki
 
 # print(diamond_list[0])
 # color_reverser(diamond_list[0])
 # print(diamond_list[0])
+blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
 fun_solutions = []
-for k_sol in diamond_list:
-    print("Reversing and solving the solution", k_sol)
-    color_reverser(k_sol)
-    solutions = kropki_solver(blank_board, k_sol, 0, 0)
-    if len(solutions) > 0:
-        fun_solutions.append(k_sol)
 
-print("There are", len(fun_solutions), "fun solutions")
-for sol in fun_solutions:
-    latex_print(k_sol)
+
+for i in range(len(diamond_list)):
+    k_sol = diamond_list[i]
+    k_copy = color_reverser(k_sol)
+    blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
+
+    all_solutions = kropki_solver(blank_board, k_copy, 0, 0, [])
+    # print(i, "has", len(all_solutions), "solutions")
+    if len(all_solutions) > 0:
+        fun_solutions.append((k_sol, k_copy))
+
+print("There are", len(fun_solutions), "fun solutions (puzzles with diamonds that are reversible... so 48 )")
+# for sol in fun_solutions:
+#     latex_print(sol[0])
+#     latex_print(sol[1])
+#     print("\\paragraph{\\\\}")
+
+# for sol in fun_solutions:
+#     num_sols = len(kropki_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]], sol[1], 0, 0, []))
+#     print(num_sols)
