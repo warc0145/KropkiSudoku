@@ -15,10 +15,10 @@ from SudokuPuzzleGenerator4x4 import solutions, print_board
 print(solutions)
 
 def find_horizontal_kropki_dots(board):
-    '''
+    """
     Searches a given board and returns a 4x3 array representing horizontal kropki dot placements (1 for black, -1 for white, 0 for no dot)
     Note, currently the circles between 1 and 2 are always black.
-    '''
+    """
     horizontal_dots = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     for r in range(len(board)):
@@ -32,10 +32,10 @@ def find_horizontal_kropki_dots(board):
     return horizontal_dots
 
 def find_vertical_kropki_dots(board):
-    '''
+    """
     Searches a given board and returns a 3x4 array representing vertical kropki dot placements (1 for black, -1 for white, 0 for no dot)
     Note, currently the circles between 1 and 2 are always black.
-    '''
+    """
     vertical_dots = [[0, 0, 0, 0], [0, 0, 0, 0,], [0, 0, 0, 0]]
     for r in range(len(board) - 1):
         for c in range(len(board[r])):
@@ -50,9 +50,9 @@ def find_vertical_kropki_dots(board):
 
 
 def maximum_kropki(board_list):
-    '''
+    """
     This function will take in all 4x4 boards and identify which has the highest number of kropki dots present
-    '''
+    """
     total_opt = 0 # Number of boards with maximum number of dots
     max_dots = 0 # Default number of dots
     best_board = None # Default board
@@ -100,9 +100,9 @@ def maximum_kropki(board_list):
 
 
 def minimum_kropki(board_list):
-    '''
+    """
     This function will take in all 4x4 boards and identify which has the lowest number of kropki dots present
-    '''
+    """
     total_opt = 0 # Number of boards with minimum number of dots
     min_dots = 24 # Hypothetical maximum number of dots
     best_board = None # Default board
@@ -148,9 +148,9 @@ def minimum_kropki(board_list):
 # minimum_kropki(solutions)
 
 def all_kropki_numbers(board_list):
-    '''
+    """
     Returns a dictionary counting all Kropki arrangements, where the key is the number of dots and the value is the number of puzzles with that many dots
-    '''
+    """
     kropki_numbers = dict()
 
     for board in board_list:
@@ -184,10 +184,10 @@ def all_kropki_numbers(board_list):
 
 kropki_solutions = []
 def all_kropki_solutions(board_list):
-    '''
+    """
     This function will append to the existing list, kropki_solutions, a tuple of horizontal dots and vertical dots (which are each two dimensional arrays)
     Then, we will examine kropki_solutions to check for uniqueness by counting repeating arrangements
-    '''
+    """
     non_unique_count = 0
     for board in board_list:
         kropki_solutions.append((find_horizontal_kropki_dots(board), find_vertical_kropki_dots(board)))

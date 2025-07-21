@@ -49,9 +49,9 @@ def find_vertical_kropki_dots(board):
     return vertical_dots
 
 def all_kropki_numbers(board_list):
-    '''
+    """
     Returns a dictionary counting all Kropki arrangements, where the key is the number of dots and the value is the number of puzzles with that many dots
-    '''
+    """
     kropki_numbers = dict()
 
     for board in board_list:
@@ -85,10 +85,10 @@ def all_kropki_numbers(board_list):
 
 non_unique_kropki_solutions = []
 def all_kropki_solutions(board_list):
-    '''
+    """
     This function will append to the existing list, non_unique_kropki_solutions, a tuple of horizontal dots and vertical dots (which are each two dimensional arrays)
     Then, we will examine non_unique_kropki_solutions to check for uniqueness by counting repeating arrangements
-    '''
+    """
     non_unique_count = 0
     for board in board_list:
         non_unique_kropki_solutions.append((find_horizontal_kropki_dots(board), find_vertical_kropki_dots(board)))

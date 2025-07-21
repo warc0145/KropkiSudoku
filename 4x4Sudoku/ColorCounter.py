@@ -12,12 +12,12 @@ from NonUniqueKropkiGenerator.py import non_unique_kropki_solutions
 from KropkiGenerator4x4.py import kropki_solutions
 
 def white_counter(solution):
-    '''
+    """
     Takes in a Kropki arrangement and returns the number of white dots present.
     Called by unique_counter and non_unique_counter
 
     Solution will be a tuple with a 4x3 array then a 3x4 array
-    '''
+    """
     white_dot_count = 0
     for type in solution: # Considers horizontal dots then vertical dots
         for row in type:
@@ -29,11 +29,11 @@ def white_counter(solution):
     
 
 def black_counter(solution):
-    '''
+    """
     Takes in a Kropki arrangement and returns the number of black dots present.
     Called by unique_counter and non_unique_counter
     Solution will be a tuple with a 4x3 array then a 3x4 array
-    '''
+    """
     black_dot_count = 0
     for type in solution: # Considers horizontal dots then vertical dots
         for row in type:
@@ -43,10 +43,10 @@ def black_counter(solution):
     return black_dot_count
 
 def non_unique_counter(solutions):
-    '''
+    """
     Will go through the non-unique set of Kropki Arrangements (where white dots are present between 1 and 2), and produce dictionaries
     that describe the number of white and black dots found across all puzzles
-    '''
+    """
     non_unique_white = dict()
     non_unique_black = dict()
 
@@ -70,10 +70,10 @@ def non_unique_counter(solutions):
 
     
 def unique_counter(solutions):
-    '''
+    """
     Will go through the unique set of Kropki Arrangements (where black dots are present between 1 and 2), and produce dictionaries
     that describe the number of white and black dots found across all puzzles
-    '''
+    """
     unique_white = dict()
     unique_black = dict()
 

@@ -11,9 +11,9 @@ Uses previous existing Kropki Arrangements and prints it out in the form that La
 from KropkiGenerator4x4 import kropki_solutions
 
 def latex_print(sol):
-    '''
+    """
     Takes in a Kropki arrangement and outputs in a form that Latex will use for the \\blankkropki macro I made
-    '''
+    """
     print("\\begin{tikzpicture}")
     print("    \\blankkropki{")
     for type in sol: # horizontal and vertical
