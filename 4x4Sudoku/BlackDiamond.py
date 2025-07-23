@@ -9,7 +9,8 @@ Description:
 Narrows down all of the Kropki arrangements to a list of only those that contain a "black diamond" of dots.
 '''
 from KropkiGenerator4x4 import kropki_solutions
-from AltLatexPrinter import latex_print
+from SolveWithKropki import kropki_solver
+from AltLatexPrinter import latex_print, solved_latex_print
 
 black_diamonds = []
 black_diamonds_1 = []
@@ -86,36 +87,36 @@ for k_sol in kropki_solutions:
 
 print("The number of puzzles with at least one black diamond is", str(len(black_diamonds)))
 
-print("#1", len(black_diamonds_1))
-for s in black_diamonds_1:
-    print(s)
-print("#2", len(black_diamonds_2))
-for s in black_diamonds_2:
-    print(s)
-print("#3", len(black_diamonds_3))
-for s in black_diamonds_3:
-    print(s)
-print("#4", len(black_diamonds_4))
-for s in black_diamonds_4:
-    print(s)
-print("#5", len(black_diamonds_5))
-for s in black_diamonds_5:
-    print(s)
-print("#6", len(black_diamonds_6))
-for s in black_diamonds_6:
-    print(s)
-print("#7", len(black_diamonds_7))
-for s in black_diamonds_7:
-    print(s)
-print("#8", len(black_diamonds_8))
-for s in black_diamonds_8:
-    print(s)
-print("#9", len(black_diamonds_9))
-for s in black_diamonds_9:
-    print(s)
-print("Multiple:", len(multiple_diamonds))
-for s in multiple_diamonds:
-    latex_print(s)
+# print("#1", len(black_diamonds_1))
+# for s in black_diamonds_1:
+#     print(s)
+# print("#2", len(black_diamonds_2))
+# for s in black_diamonds_2:
+#     print(s)
+# print("#3", len(black_diamonds_3))
+# for s in black_diamonds_3:
+#     print(s)
+# print("#4", len(black_diamonds_4))
+# for s in black_diamonds_4:
+#     print(s)
+# print("#5", len(black_diamonds_5))
+# for s in black_diamonds_5:
+#     print(s)
+# print("#6", len(black_diamonds_6))
+# for s in black_diamonds_6:
+#     print(s)
+# print("#7", len(black_diamonds_7))
+# for s in black_diamonds_7:
+#     print(s)
+# print("#8", len(black_diamonds_8))
+# for s in black_diamonds_8:
+#     print(s)
+# print("#9", len(black_diamonds_9))
+# for s in black_diamonds_9:
+#     print(s)
+# print("Multiple:", len(multiple_diamonds))
+# for s in multiple_diamonds:
+#     latex_print(s)
 
 
 for k_sol in kropki_solutions:
@@ -139,5 +140,8 @@ for k_sol in kropki_solutions:
         if k_sol[1][1][2] == 1 and k_sol[1][2][2] == 1: # top and bottom of the cell
             black_cells.append(k_sol)
 print("black cells:", len(black_cells))
-for s in black_cells:
-    latex_print(s)
+
+
+for k_sol in black_cells:
+    num_sol = kropki_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]], k_sol, 0, 0, [])[0] 
+    solved_latex_print(num_sol, k_sol)

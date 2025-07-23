@@ -9,7 +9,8 @@ Description:
 Narrows down all of the Kropki arrangements to a list of only those that contain a "black diamond" or a "white diamond" of dots.
 '''
 from KropkiGenerator4x4 import kropki_solutions
-from AltLatexPrinter import latex_print
+from AltLatexPrinter import latex_print, solved_latex_print
+from SolveWithKropki import kropki_solver
 
 diamond_list = []
 no_diamond_list = []
@@ -164,3 +165,8 @@ for k_sol in kropki_solutions:
             full_cell_list.append(k_sol)
 
 print("Full cells:", len(full_cell_list))
+
+# for k_sol in full_cell_list:
+#     # The indexing below is necessary; kropki_solver returns a LIST of solutions, this one just happens to only have one solution
+#     num_sol = kropki_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]], k_sol, 0, 0, [])[0] 
+#     solved_latex_print(num_sol, k_sol)
