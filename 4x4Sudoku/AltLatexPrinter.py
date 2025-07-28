@@ -12,6 +12,7 @@ Takes up less lines in printing by printing the horizontal dots in one line rath
 New addition as of 7/21/25: A method that will print out in latex form but with the full solution filled in.
 '''
 # from KropkiGenerator4x4 import kropki_solutions
+from Coloring import sudoku_colorings
 
 def latex_print(kropki_arrangement):
     """
@@ -70,8 +71,26 @@ def solved_latex_print(solution, kropki_arrangement):
     print("\\end{tikzpicture}")
 
 
+def color_printer(coloring):
+    """
+    Takes in a coloring and prints out the latex macro form.
+    """
+    print("\\sudokuColor")
+    for color in coloring: # Four colors, each have four locations
+        print("    {",end="")
+        for location in color: # Iterate through the four locations
+            print(str(location[0]) + "/" + str(location[1]), end="")
+            if location is not color[-1]: 
+                print(", ", end="")
+            else:
+                print("}")
+
+
 # for sol in kropki_solutions[:10]:
 #     latex_print(sol)
 ex_sol = [[1, 2, 3, 4], [3, 4, 1, 2], [2, 1, 4, 3], [4, 3, 2, 1]]
 ex_kropki = ([[1, -1, -1], [-1, 0, 1], [1, 0, -1], [-1, -1, 1]], [[0, 1, 0, 1], [-1, 0, 0, -1], [1, 0, 1, 0]])
 # solved_latex_print(ex_sol, ex_kropki)
+
+for each in sudoku_colorings:
+    color_printer(each)
