@@ -35,7 +35,11 @@ def check_kropki(current_board, current_row, current_column, kropki_sol, guess):
         if kropki_sol[0][current_row][k_col] == -1:
             difference = guess - current_board[current_row][k_col]
             if difference == 1 or difference == -1:
-                horizontal_valid = True
+                # Must also consider if it is a 1 and 2; this requires a black dot, so it would be invalid here
+                if guess == 1 or current_board[current_row][k_col] == 1:
+                    horizontal_valid = False
+                else:
+                    horizontal_valid = True
             else:
                 horizontal_valid = False
 
@@ -122,13 +126,9 @@ def kropki_solver(current_board, kropki_sol, current_row, current_column, soluti
 
                         if current_column < 3: # move to next column
                             kropki_solver(current_board, kropki_sol, current_row, current_column+1, solutions)
-                            # if type(end_val) == list:
-                            #     return end_val
                         else: # At the end of the current row
                             if current_row < 3: # Move to next row
                                 kropki_solver(current_board, kropki_sol, current_row + 1, 0, solutions)
-                                # if type(end_val) == list:
-                                #     return end_val
                             else: # We are at the end of the board!                            
                                 solutions.append([row.copy() for row in current_board])
 
@@ -146,6 +146,10 @@ blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
 # print(kropki_solver(blank_board, kropki_solutions[0], 0, 0, []))
 
 blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
-kropki_solution_eg = ([[-1, -1, -1], [-1, -1, -1], [-1, 0, -1], [-1, 0, -1]], [[0, -1, -1, 0], [-1, -1, -1, -1], [-1, 0, 0, -1]])
-# print("Running to check for multiple solutions")
+kropki_solution_eg = ([[1, -1, -1], [-1, 0, 1], [-1, -1, 1], [1, 0, -1]], [[0, 1, 0, 1], [-1, -1, 1, 1], [1, 0, 1, 0]])
+
 # print(kropki_solver(blank_board, kropki_solution_eg, 0, 0, []))
+# for i in range(len(kropki_solutions)):
+#     blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
+#     num = len(kropki_solver(blank_board, kropki_solutions[i], 0, 0, []))
+#     print("sol", i, "has", num, "solutions")
