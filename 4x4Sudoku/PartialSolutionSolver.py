@@ -59,8 +59,12 @@ def check_partial_kropki(current_board, partial_kropki, current_row, current_col
                 # print("We are guessing a value for the location", current_row, current_column, "which has a white dot to the left")
                 # print("Our guess is", guess, "and the value to the left is")
                 difference = guess - current_board[k_row][current_column]
-                if difference == 1 or difference == -1:
-                    vertical_valid = True
+                if difference == 1 or difference == -1: 
+                    # Since we don't want a white dot between a one and a two, we must check that neither are a one:
+                    if guess == 1 or current_board[k_row][current_column] == 1:
+                        vertical_valid = False
+                    else:
+                        vertical_valid = True
                 else:
                     vertical_valid = False
 
@@ -239,3 +243,5 @@ def four_dot_finder():
                 current_k_arrangement[i][j][k] = 0
     return unique_solutions, "total attempts: ", total_attempts, "total solutions", total_solutions
 # print(four_dot_finder())
+
+# print(partial_solver(blank_board, ([[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, -1]], [[0, 0, 0, 0], [0, 0, 0, -1], [0, 1, 0, -1]]), 0, 0, []))
