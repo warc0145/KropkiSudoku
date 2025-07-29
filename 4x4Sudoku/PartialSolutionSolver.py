@@ -10,6 +10,7 @@ Description:
 Previous solvers assume that where a dot is not present, a dot *cannot* be present. This solver does not make that assumption and
 instead assumes that the kropki arrangement is a partial arrangement, finding all possible solutions.
 '''
+import itertools
 from SudokuPuzzleGenerator4x4 import check_row, check_column, check_box
 
 def check_partial_kropki(current_board, partial_kropki, current_row, current_column, guess):
@@ -126,3 +127,115 @@ blank_board = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
 blank_arrangement = ([[0,0,0],[0,0,0],[0,0,0],[0,0,0]],[[0,0,0,0],[0,0,0,0],[0,0,0,0]])
 
 # print(len(partial_solver(blank_board, blank_arrangement, 0, 0, [])))
+
+# Now, I want to use the above method to find the minimum number of dots required for a unique solution
+def partial_solution_minimizer():
+    """
+    The number assigned to dot locations:
+    ([[1,2,3], [4,5,6], [7,8,9], [10,11,12]], 
+    [[13,14,15,16], [17,18,19,20], [21,22,23,24]])
+
+    When I need to choose three dots, I will choose every combination ofthree numbers from 1-24 
+    then consider every combination of those being black or white.
+
+    e.g. three dots, first choice is 1,2,3. could be bbb,bbw,bwb,bww,wbb,wbw,wwb,www
+    """
+    current_k_arrangement = ([[0,0,0], [0,0,0], [0,0,0], [0,0,0]], [[0,0,0,0], [0,0,0,0], [0,0,0,0]])
+    # First build a dictionary that relates number to a dot's position on the board:
+    position_dict = dict()
+    count = 1
+    for dot_type in range(len(current_k_arrangement)): # Counts horizontal dots (current_k_arrangement[0]) and vertical dots (current_k_arrangement[1])
+        for row in range(len(current_k_arrangement[dot_type])): # Considers each row of each type
+            for col in range(len(current_k_arrangement[dot_type][row])): # Considers each column in each row in each type (now considering every dot location)
+                position_dict[count] = (dot_type, row, col)
+                count += 1
+
+    for num_dots in range(1,12): # Through brute force counting, I know that there are unique 12 dot solutions, so no need to consider 13-24 dots
+        print("Num dots:", num_dots)
+        # dot_sets will be a list of all combinations of length(num_dots) of the numbers 1-24. Must examine each set individually
+        dot_sets = list(itertools.combinations(position_dict.keys(), num_dots))
+        # print(dot_sets)
+        for set_num in range(len(dot_sets)): # The length of dot_sets is dependent on num_dots. len(dot_sets) = (24 choose num_dots)
+            locations = [position_dict[key] for key in dot_sets[set_num]]
+            # print("locations:", locations)
+            
+            # Now that we have the locations we need to explore, we need every combination of black and white dots. 
+                # For one location, this will just be b and w at each
+                # For two locations, this will be bb,ww,bw,wb for each set of two
+                # For three, bbb,bbw,bwb,bww,wbb,wbw,wwb,www for each set of three
+                # And so on
+            # Below, dot_types becomes a list of every color combination that is the length of num_dots
+            dot_types = list(itertools.product((1,-1), repeat=num_dots))
+            # print("all dot combos:", dot_types)
+
+            for each in dot_types:
+                # print("Dot types:", each)
+                for x in range(len(each)):
+                    i,j,k = locations[x]
+                    current_k_arrangement[i][j][k] = each[x]
+                all_solutions = partial_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]],
+                                                current_k_arrangement, 0, 0, [])
+                num_solutions = len(all_solutions)
+                if num_solutions == 1:
+                    print("Answer found!")
+                    print("The current kropki arrangement is " + str(current_k_arrangement) + " and it has one solution")
+                    return
+                # After attempting solution, return current kropki arrangement to blank form
+                for x in range(len(each)):
+                    i,j,k = locations[x]
+                    current_k_arrangement[i][j][k] = 0
+                
+# partial_solution_minimizer()
+
+# Now that I know that there are some four dot partial arrangements with unique solutions, let's see how many there are\
+def four_dot_finder():
+    """
+    Find and count all four dot partial-kropki-arrangements that have a unique solution.
+    """
+    unique_solutions = [] # will hold a list of partial arrangements with four dots and a unique solution
+    total_attempts = 0
+    total_solutions = 0
+
+    current_k_arrangement = ([[0,0,0], [0,0,0], [0,0,0], [0,0,0]], [[0,0,0,0], [0,0,0,0], [0,0,0,0]])
+    # First build a dictionary that relates number to a dot's position on the board:
+    position_dict = dict()
+    count = 1
+    for dot_type in range(len(current_k_arrangement)): # Counts horizontal dots (current_k_arrangement[0]) and vertical dots (current_k_arrangement[1])
+        for row in range(len(current_k_arrangement[dot_type])): # Considers each row of each type
+            for col in range(len(current_k_arrangement[dot_type][row])): # Considers each column in each row in each type (now considering every dot location)
+                position_dict[count] = (dot_type, row, col)
+                count += 1
+
+    dot_sets = list(itertools.combinations(position_dict.keys(), 4))
+    # print(dot_sets)
+    for set_num in range(len(dot_sets)): # The length of dot_sets is (24 chooose 4)
+        locations = [position_dict[key] for key in dot_sets[set_num]]
+        # print("locations:", locations)
+            
+        # Now that we have the locations we need to explore, we need every combination of black and white dots.
+        # For each set of four: bbbb,bbbw,bbwb,bbww,bwbb,bwbw,bwwb,bwww,wbbb,wbbw,wbwb,wbww,wwbb,wwbw,wwwb,wwww
+        dot_types = list(itertools.product((1,-1), repeat=4))
+        # print("all dot combos:", dot_types)
+
+        for each in dot_types:
+            # print("Dot types:", each)
+            for x in range(len(each)):
+                i,j,k = locations[x]
+                current_k_arrangement[i][j][k] = each[x]
+            
+            all_solutions = partial_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]],
+                                            current_k_arrangement, 0, 0, [])
+            num_solutions = len(all_solutions)
+            total_attempts += 1
+            
+            if num_solutions == 1:
+                # Since the tuple contains list, we must append a tuple of a copy of the lists in order to continue modifying the temporary
+                # version without affecting the permanent version
+                total_solutions += 1
+                unique_solutions.append(([row.copy() for row in current_k_arrangement[0]], [row.copy() for row in current_k_arrangement[1]]))
+            # After attempting solution, return current kropki arrangement to blank form
+            for x in range(len(each)):
+                i,j,k = locations[x]
+                current_k_arrangement[i][j][k] = 0
+    return unique_solutions, "total attempts: ", total_attempts, "total solutions", total_solutions
+# print(four_dot_finder())
