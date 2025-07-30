@@ -104,3 +104,10 @@ def all_kropki_solutions(board_list):
 
 all_kropki_solutions(solutions)
 # print(non_unique_kropki_solutions[3])
+
+non_unique_boards = []
+
+for i in range(len(solutions)):
+    if non_unique_kropki_solutions.count(non_unique_kropki_solutions[i]) > 1:
+        non_unique_boards.append(solutions[i])
+# print("there are", len(non_unique_boards), "non unique boards")
