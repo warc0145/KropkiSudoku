@@ -96,10 +96,10 @@ def all_kropki_solutions(board_list):
     for i in range(len(non_unique_kropki_solutions)):
         if non_unique_kropki_solutions.count(non_unique_kropki_solutions[i]) > 1:
             non_unique_count +=1
-            print("The arrangement:")
-            print(non_unique_kropki_solutions[i])
-            print("Appears", non_unique_kropki_solutions.count(non_unique_kropki_solutions[i]), "times. Here is the current board with the arrangement:")
-            print_board(board_list[i])
+            # print("The arrangement:")
+            # print(non_unique_kropki_solutions[i])
+            # print("Appears", non_unique_kropki_solutions.count(non_unique_kropki_solutions[i]), "times. Here is the current board with the arrangement:")
+            # print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
 
 all_kropki_solutions(solutions)
