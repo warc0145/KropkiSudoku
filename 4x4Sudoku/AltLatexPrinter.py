@@ -12,7 +12,7 @@ Takes up less lines in printing by printing the horizontal dots in one line rath
 New addition as of 7/21/25: A method that will print out in latex form but with the full solution filled in.
 '''
 # from KropkiGenerator4x4 import kropki_solutions
-from Coloring import sudoku_colorings
+from Coloring import sudoku_colorings, non_unique_colorings
 
 def latex_print(kropki_arrangement):
     """
@@ -92,5 +92,8 @@ ex_sol = [[1, 2, 3, 4], [3, 4, 1, 2], [2, 1, 4, 3], [4, 3, 2, 1]]
 ex_kropki = ([[1, -1, -1], [-1, 0, 1], [1, 0, -1], [-1, -1, 1]], [[0, 1, 0, 1], [-1, 0, 0, -1], [1, 0, 1, 0]])
 # solved_latex_print(ex_sol, ex_kropki)
 
-for each in sudoku_colorings:
-    color_printer(each)
+# for each in sudoku_colorings:
+#     color_printer(each)
+# print("Now, non-unique:")
+# for each in non_unique_colorings:
+#     color_printer(each)
