@@ -84,38 +84,38 @@ for k_sol in kropki_solutions:
     if count > 1:
         multiple_diamonds.append(k_sol)
 
-print("The number of puzzles with at least one white diamond is", str(len(white_diamonds)))
+# print("The number of puzzles with at least one white diamond is", str(len(white_diamonds)))
 
-print("#1", len(white_diamonds_1))
-for s in white_diamonds_1:
-    print(s)
-print("#2", len(white_diamonds_2))
-for s in white_diamonds_2:
-    print(s)
-print("#3", len(white_diamonds_3))
-for s in white_diamonds_3:
-    print(s)
-print("#4", len(white_diamonds_4))
-for s in white_diamonds_4:
-    print(s)
-print("#5", len(white_diamonds_5))
-for s in white_diamonds_5:
-    print(s)
-print("#6", len(white_diamonds_6))
-for s in white_diamonds_6:
-    print(s)
-print("#7", len(white_diamonds_7))
-for s in white_diamonds_7:
-    print(s)
-print("#8", len(white_diamonds_8))
-for s in white_diamonds_8:
-    print(s)
-print("#9", len(white_diamonds_9))
-for s in white_diamonds_9:
-    print(s)
-print("Multiple:", len(multiple_diamonds))
-for s in multiple_diamonds:
-    latex_print(s)
+# print("#1", len(white_diamonds_1))
+# for s in white_diamonds_1:
+#     print(s)
+# print("#2", len(white_diamonds_2))
+# for s in white_diamonds_2:
+#     print(s)
+# print("#3", len(white_diamonds_3))
+# for s in white_diamonds_3:
+#     print(s)
+# print("#4", len(white_diamonds_4))
+# for s in white_diamonds_4:
+#     print(s)
+# print("#5", len(white_diamonds_5))
+# for s in white_diamonds_5:
+#     print(s)
+# print("#6", len(white_diamonds_6))
+# for s in white_diamonds_6:
+#     print(s)
+# print("#7", len(white_diamonds_7))
+# for s in white_diamonds_7:
+#     print(s)
+# print("#8", len(white_diamonds_8))
+# for s in white_diamonds_8:
+#     print(s)
+# print("#9", len(white_diamonds_9))
+# for s in white_diamonds_9:
+#     print(s)
+# print("Multiple:", len(multiple_diamonds))
+# for s in multiple_diamonds:
+#     latex_print(s)
 
 
 for k_sol in kropki_solutions:
@@ -138,6 +138,7 @@ for k_sol in kropki_solutions:
     elif k_sol[0][2][1] == -1 and k_sol[0][2][2] == -1: # Sides of the cell
         if k_sol[1][1][2] == -1 and k_sol[1][2][2] == -1: # top and bottom of the cell
             white_cells.append(k_sol)
+
 print("White cells:", len(white_cells))
-for s in white_cells:
-    latex_print(s)
+# for s in white_cells:
+    # latex_print(s)
