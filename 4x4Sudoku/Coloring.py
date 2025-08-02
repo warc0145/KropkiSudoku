@@ -10,6 +10,10 @@ Will assist in counting all of the ways to color a 4x4 sudoku. Unsure at the mom
 '''
 from SudokuPuzzleGenerator4x4 import solutions
 from NonUniqueKropkiGenerator import non_unique_boards
+from SolveWithKropki import kropki_solver
+from BlackDiamond import black_cells
+from WhiteDiamond import white_cells
+from AltLatexPrinter import color_printer
 
 def colorer(board_list):
     """
@@ -60,7 +64,39 @@ def colorer(board_list):
             colorings[this_sol] = 1
     return colorings
 
-sudoku_colorings = colorer(solutions)
-print("Now coloring boards with non unique arrangements:", non_unique_boards)
-non_unique_colorings = colorer(non_unique_boards)
-print(non_unique_colorings)
+# sudoku_colorings = colorer(solutions)
+# print("Now coloring boards with non unique arrangements:", non_unique_boards)
+# non_unique_colorings = colorer(non_unique_boards)
+# print(non_unique_colorings)
+
+# finding the colorings of all boards with a black cell:
+black_cell_boards = []
+for s in black_cells:
+    black_cell_boards.append(kropki_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]],
+                                            s, 0, 0, [])[0])
+    # The [0] indexing at the end returns the first element in the list that is returned by kropki solver;
+    # kropki_solver returns a list of all valid solutions, and these arrangements all have one solution, so the list has one element
+black_colorings = colorer(black_cell_boards)
+# print("Colorings of puzzles with black cells:", black_colorings)
+
+# Now latex print the colorings:
+print("Colorings of boards with black cells:")
+for b_coloring in black_colorings:
+    print(f"\\paragraph{{The following coloring appears {black_colorings[b_coloring]} times}}")
+    color_printer(b_coloring)
+
+# finding the colorings of all boards with a whitecell:
+white_cell_boards = []
+for s in white_cells:
+    white_cell_boards.append(kropki_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]],
+                                            s, 0, 0, [])[0])
+    # The [0] indexing at the end returns the first element in the list that is returned by kropki solver;
+    # kropki_solver returns a list of all valid solutions, and these arrangements all have one solution, so the list has one element
+white_colorings = colorer(white_cell_boards)
+# print("Colorings of puzzles with white cells:", white_colorings)
+
+# Now latex print the colorings:
+print("Colorings of boards with white cells:")
+for w_coloring in white_colorings:
+    print(f"\\paragraph{{The following coloring appears {white_colorings[w_coloring]} times}}")
+    color_printer(w_coloring)
