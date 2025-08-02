@@ -12,7 +12,7 @@ Takes up less lines in printing by printing the horizontal dots in one line rath
 New addition as of 7/21/25: A method that will print out in latex form but with the full solution filled in.
 '''
 # from KropkiGenerator4x4 import kropki_solutions
-from Coloring import sudoku_colorings, non_unique_colorings
+# from Coloring import sudoku_colorings, non_unique_colorings
 
 def latex_print(kropki_arrangement):
     """
