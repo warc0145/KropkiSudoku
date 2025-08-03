@@ -16,103 +16,108 @@ diamond_list = []
 no_diamond_list = []
 full_cell_list = []
 no_full_cells_list = []
+both_diamonds = [] # Contains a blackj and white diamond
 
 for k_sol in kropki_solutions:
     count = 0
-    valid = False
+    white = False
+    black = False
     # k_sol is three layers deep. First, horizontal and vertical dots, then the row or column within the type of dots, then the position in the row or column
 
     ### WHITE DIAMOND
     # Here, I check for diamonds in which the top is in the top row:
     if k_sol[0][0][0] == -1 and k_sol[0][1][0] == -1: # top and bottom of diamond
         if k_sol[1][0][0] == -1 and k_sol[1][0][1] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
     elif k_sol[0][0][1] == -1 and k_sol[0][1][1] == -1: # top and bottom of diamond
         if k_sol[1][0][1] == -1 and k_sol[1][0][2] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
     elif k_sol[0][0][2] == -1 and k_sol[0][1][2] == -1: # top and bottom of diamond
         if k_sol[1][0][2] == -1 and k_sol[1][0][3] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
 
     # Here, I check for diamonds in which the top is in the second row:
     elif k_sol[0][1][0] == -1 and k_sol[0][2][0] == -1: # top and bottom of diamond
         if k_sol[1][1][0] == -1 and k_sol[1][1][1] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
     elif k_sol[0][1][1] == -1 and k_sol[0][2][1] == -1: # top and bottom of diamond
         if k_sol[1][1][1] == -1 and k_sol[1][1][2] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
     elif k_sol[0][1][2] == -1 and k_sol[0][2][2] == -1: # top and bottom of diamond
         if k_sol[1][1][2] == -1 and k_sol[1][1][3] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
 
     # Here, I check for diamonds in which the top is in the third row:
     elif k_sol[0][2][0] == -1 and k_sol[0][3][0] == -1: # top and bottom of diamond
         if k_sol[1][2][0] == -1 and k_sol[1][2][1] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
     elif k_sol[0][2][1] == -1 and k_sol[0][3][1] == -1: # top and bottom of diamond
         if k_sol[1][2][1] == -1 and k_sol[1][2][2] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
     elif k_sol[0][2][2] == -1 and k_sol[0][3][2] == -1: # top and bottom of diamond
         if k_sol[1][2][2] == -1 and k_sol[1][2][3] == -1: # Sides of diamond
-            valid = True
+            white = True
             count += 1
 
     
 
     ### BLACK DIAMONDS
     # Here, I check for diamonds in which the top is in the top row:
-    elif k_sol[0][0][0] == 1 and k_sol[0][1][0] == 1: # top and bottom of diamond
+    if k_sol[0][0][0] == 1 and k_sol[0][1][0] == 1: # top and bottom of diamond
         if k_sol[1][0][0] == 1 and k_sol[1][0][1] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
     elif k_sol[0][0][1] == 1 and k_sol[0][1][1] == 1: # top and bottom of diamond
         if k_sol[1][0][1] == 1 and k_sol[1][0][2] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
     elif k_sol[0][0][2] == 1 and k_sol[0][1][2] == 1: # top and bottom of diamond
         if k_sol[1][0][2] == 1 and k_sol[1][0][3] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
 
     # Here, I check for diamonds in which the top is in the second row:
     elif k_sol[0][1][0] == 1 and k_sol[0][2][0] == 1: # top and bottom of diamond
         if k_sol[1][1][0] == 1 and k_sol[1][1][1] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
     elif k_sol[0][1][1] == 1 and k_sol[0][2][1] == 1: # top and bottom of diamond
         if k_sol[1][1][1] == 1 and k_sol[1][1][2] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
     elif k_sol[0][1][2] == 1 and k_sol[0][2][2] == 1: # top and bottom of diamond
         if k_sol[1][1][2] == 1 and k_sol[1][1][3] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
 
     # Here, I check for diamonds in which the top is in the third row:
     elif k_sol[0][2][0] == 1 and k_sol[0][3][0] == 1: # top and bottom of diamond
         if k_sol[1][2][0] == 1 and k_sol[1][2][1] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
     elif k_sol[0][2][1] == 1 and k_sol[0][3][1] == 1: # top and bottom of diamond
         if k_sol[1][2][1] == 1 and k_sol[1][2][2] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
     elif k_sol[0][2][2] == 1 and k_sol[0][3][2] == 1: # top and bottom of diamond
         if k_sol[1][2][2] == 1 and k_sol[1][2][3] == 1: # Sides of diamond
-            valid = True
+            black = True
             count += 1
-    if valid:
+    
+    if black or white:
         diamond_list.append(k_sol)
     else:
         no_diamond_list.append(k_sol)
+    if black and white:
+        both_diamonds.append(k_sol)
  
 print("The number of puzzles with at least one diamond is", str(len(diamond_list)))
 
@@ -170,3 +175,5 @@ print("Full cells:", len(full_cell_list))
 #     # The indexing below is necessary; kropki_solver returns a LIST of solutions, this one just happens to only have one solution
 #     num_sol = kropki_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]], k_sol, 0, 0, [])[0] 
 #     solved_latex_print(num_sol, k_sol)
+
+print("There are", len(both_diamonds), "puzzles with a white and a black diamond:")
