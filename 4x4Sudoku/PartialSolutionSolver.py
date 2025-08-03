@@ -12,6 +12,10 @@ instead assumes that the kropki arrangement is a partial arrangement, finding al
 '''
 import itertools
 from SudokuPuzzleGenerator4x4 import check_row, check_column, check_box
+from SolveWithKropki import kropki_solver
+from Coloring import colorer
+from AltLatexPrinter import color_printer
+from KropkiGenerator4x4 import all_kropki_numbers, find_horizontal_kropki_dots, find_vertical_kropki_dots
 
 def check_partial_kropki(current_board, partial_kropki, current_row, current_column, guess):
     """
@@ -241,7 +245,70 @@ def four_dot_finder():
             for x in range(len(each)):
                 i,j,k = locations[x]
                 current_k_arrangement[i][j][k] = 0
-    return unique_solutions, "total attempts: ", total_attempts, "total solutions", total_solutions
-# print(four_dot_finder())
+    return unique_solutions
 
-# print(partial_solver(blank_board, ([[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, -1]], [[0, 0, 0, 0], [0, 0, 0, -1], [0, 1, 0, -1]]), 0, 0, []))
+four_dot_solutions = four_dot_finder()
+print("Now we have a list of partial arrangements that each have one solution. There are " + str(len(four_dot_solutions)) + ".\n")
+
+# Every 4x4 solution that appears will be stored here. We will track how many appear / are used
+full_solutions = []
+
+for partial_k in four_dot_solutions:
+    current_sol = partial_solver([[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]],
+                                partial_k, 0, 0, [])[0]
+    if current_sol not in full_solutions:
+        full_solutions.append(current_sol)
+
+print("Done collecting; the partial arrangements cover", len(full_solutions), "of the full solutions. Counting dots in the full arrangements...")
+
+# for sol in full_solutions:
+#     print(sol)
+
+# all_kropki_numbers(full_solutions)
+
+all_colorings = {(((0, 0), (1, 2), (2, 1), (3, 3)), ((0, 1), (1, 3), (2, 0), (3, 2)), ((0, 2), (1, 0), (2, 3), (3, 1)), ((0, 3), (1, 1), (2, 2), (3, 0))): 24, 
+                (((0, 0), (1, 2), (2, 3), (3, 1)), ((0, 1), (1, 3), (2, 0), (3, 2)), ((0, 2), (1, 0), (2, 1), (3, 3)), ((0, 3), (1, 1), (2, 2), (3, 0))): 24, 
+                (((0, 0), (1, 2), (2, 1), (3, 3)), ((0, 1), (1, 3), (2, 2), (3, 0)), ((0, 2), (1, 0), (2, 3), (3, 1)), ((0, 3), (1, 1), (2, 0), (3, 2))): 24, 
+                (((0, 0), (1, 2), (2, 3), (3, 1)), ((0, 1), (1, 3), (2, 2), (3, 0)), ((0, 2), (1, 0), (2, 1), (3, 3)), ((0, 3), (1, 1), (2, 0), (3, 2))): 24, 
+                (((0, 0), (1, 3), (2, 1), (3, 2)), ((0, 1), (1, 2), (2, 0), (3, 3)), ((0, 2), (1, 0), (2, 3), (3, 1)), ((0, 3), (1, 1), (2, 2), (3, 0))): 24, 
+                (((0, 0), (1, 3), (2, 2), (3, 1)), ((0, 1), (1, 2), (2, 3), (3, 0)), ((0, 2), (1, 0), (2, 1), (3, 3)), ((0, 3), (1, 1), (2, 0), (3, 2))): 24, 
+                (((0, 0), (1, 2), (2, 1), (3, 3)), ((0, 1), (1, 3), (2, 0), (3, 2)), ((0, 2), (1, 1), (2, 3), (3, 0)), ((0, 3), (1, 0), (2, 2), (3, 1))): 24, 
+                (((0, 0), (1, 2), (2, 3), (3, 1)), ((0, 1), (1, 3), (2, 2), (3, 0)), ((0, 2), (1, 1), (2, 0), (3, 3)), ((0, 3), (1, 0), (2, 1), (3, 2))): 24, 
+                (((0, 0), (1, 3), (2, 1), (3, 2)), ((0, 1), (1, 2), (2, 0), (3, 3)), ((0, 2), (1, 1), (2, 3), (3, 0)), ((0, 3), (1, 0), (2, 2), (3, 1))): 24, 
+                (((0, 0), (1, 3), (2, 2), (3, 1)), ((0, 1), (1, 2), (2, 0), (3, 3)), ((0, 2), (1, 1), (2, 3), (3, 0)), ((0, 3), (1, 0), (2, 1), (3, 2))): 24, 
+                (((0, 0), (1, 3), (2, 1), (3, 2)), ((0, 1), (1, 2), (2, 3), (3, 0)), ((0, 2), (1, 1), (2, 0), (3, 3)), ((0, 3), (1, 0), (2, 2), (3, 1))): 24, 
+                (((0, 0), (1, 3), (2, 2), (3, 1)), ((0, 1), (1, 2), (2, 3), (3, 0)), ((0, 2), (1, 1), (2, 0), (3, 3)), ((0, 3), (1, 0), (2, 1), (3, 2))): 24}
+
+# small_kropki_colorings = colorer(full_solutions)
+# print("The 122 solutions cover", len(small_kropki_colorings), "colorings. Now printing latex form:")
+# for coloring in small_kropki_colorings:
+#     color_printer(coloring)
+
+# for coloring in all_colorings:
+#     if coloring not in small_kropki_colorings:
+#         color_printer(coloring)
+
+print("Now counting number of arrangements per board...")
+# Here, I count for each of the 122 solutions with 4-dot-arrangements, how many four dot arrangements they have;
+for current_board in full_solutions:
+    num_four_dot_arrangements = 0
+
+    full_board_k = (find_horizontal_kropki_dots(current_board), find_vertical_kropki_dots(current_board))
+
+    for partial_k in four_dot_solutions: # Check every four-dot-arrangement against every full-board
+        dot_count = 0
+        for dot_type in range(len(partial_k)): # Explore horizontal dots then vertical dots
+            for row in range(len(partial_k[dot_type])): # Explore each row
+                for cell in range(len(partial_k[dot_type][row])): # Explore every cell
+                    if partial_k[dot_type][row][cell] is not 0:
+                        # Then we need to check if it is in our current board, so we know if this counts towards the num_four_dot_arrangements
+                        if partial_k[dot_type][row][cell] == full_board_k[dot_type][row][cell]: 
+                            # Each dot that is correct add one; we will check if all four are outside of the loops
+                            dot_count += 1
+        
+        if dot_count == 4:
+            # Then yes, this partial arrangement goes with this board!
+            num_four_dot_arrangements += 1
+    
+    # Now we have the full count of how many four-dot-arrangements this solution hasL:
+    print("The current solution,", current_board, "with the followuing kropki arrangement", full_board_k, "has", num_four_dot_arrangements, "four dot arrangements.")
