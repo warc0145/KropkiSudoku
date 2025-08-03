@@ -80,10 +80,10 @@ black_colorings = colorer(black_cell_boards)
 # print("Colorings of puzzles with black cells:", black_colorings)
 
 # Now latex print the colorings:
-print("Colorings of boards with black cells:")
-for b_coloring in black_colorings:
-    print(f"\\paragraph{{The following coloring appears {black_colorings[b_coloring]} times}}")
-    color_printer(b_coloring)
+# print("Colorings of boards with black cells:")
+# for b_coloring in black_colorings:
+#     print(f"\\paragraph{{The following coloring appears {black_colorings[b_coloring]} times}}")
+#     color_printer(b_coloring)
 
 # finding the colorings of all boards with a whitecell:
 white_cell_boards = []
@@ -96,7 +96,7 @@ white_colorings = colorer(white_cell_boards)
 # print("Colorings of puzzles with white cells:", white_colorings)
 
 # Now latex print the colorings:
-print("Colorings of boards with white cells:")
-for w_coloring in white_colorings:
-    print(f"\\paragraph{{The following coloring appears {white_colorings[w_coloring]} times}}")
-    color_printer(w_coloring)
+# print("Colorings of boards with white cells:")
+# for w_coloring in white_colorings:
+#     print(f"\\paragraph{{The following coloring appears {white_colorings[w_coloring]} times}}")
+#     color_printer(w_coloring)
