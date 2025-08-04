@@ -132,7 +132,7 @@ def print_board(board):
     """
     Print a visual of the board, which should be a two dimensional, 6x6 array
     """
-    for row_num in range(4):
+    for row_num in range(6):
         row = board[row_num]
         if row_num % 2 == 0:
             print("-----------------")
