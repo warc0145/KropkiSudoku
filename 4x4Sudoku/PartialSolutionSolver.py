@@ -288,27 +288,29 @@ all_colorings = {(((0, 0), (1, 2), (2, 1), (3, 3)), ((0, 1), (1, 3), (2, 0), (3,
 #     if coloring not in small_kropki_colorings:
 #         color_printer(coloring)
 
-print("Now counting number of arrangements per board...")
-# Here, I count for each of the 122 solutions with 4-dot-arrangements, how many four dot arrangements they have;
-for current_board in full_solutions:
-    num_four_dot_arrangements = 0
 
-    full_board_k = (find_horizontal_kropki_dots(current_board), find_vertical_kropki_dots(current_board))
 
-    for partial_k in four_dot_solutions: # Check every four-dot-arrangement against every full-board
-        dot_count = 0
-        for dot_type in range(len(partial_k)): # Explore horizontal dots then vertical dots
-            for row in range(len(partial_k[dot_type])): # Explore each row
-                for cell in range(len(partial_k[dot_type][row])): # Explore every cell
-                    if partial_k[dot_type][row][cell] is not 0:
-                        # Then we need to check if it is in our current board, so we know if this counts towards the num_four_dot_arrangements
-                        if partial_k[dot_type][row][cell] == full_board_k[dot_type][row][cell]: 
-                            # Each dot that is correct add one; we will check if all four are outside of the loops
-                            dot_count += 1
+# print("Now counting number of arrangements per board...")
+# # Here, I count for each of the 122 solutions with 4-dot-arrangements, how many four dot arrangements they have;
+# for current_board in full_solutions:
+#     num_four_dot_arrangements = 0
+
+#     full_board_k = (find_horizontal_kropki_dots(current_board), find_vertical_kropki_dots(current_board))
+
+#     for partial_k in four_dot_solutions: # Check every four-dot-arrangement against every full-board
+#         dot_count = 0
+#         for dot_type in range(len(partial_k)): # Explore horizontal dots then vertical dots
+#             for row in range(len(partial_k[dot_type])): # Explore each row
+#                 for cell in range(len(partial_k[dot_type][row])): # Explore every cell
+#                     if partial_k[dot_type][row][cell] is not 0:
+#                         # Then we need to check if it is in our current board, so we know if this counts towards the num_four_dot_arrangements
+#                         if partial_k[dot_type][row][cell] == full_board_k[dot_type][row][cell]: 
+#                             # Each dot that is correct add one; we will check if all four are outside of the loops
+#                             dot_count += 1
         
-        if dot_count == 4:
-            # Then yes, this partial arrangement goes with this board!
-            num_four_dot_arrangements += 1
+#         if dot_count == 4:
+#             # Then yes, this partial arrangement goes with this board!
+#             num_four_dot_arrangements += 1
     
-    # Now we have the full count of how many four-dot-arrangements this solution hasL:
-    print("The current solution,", current_board, "with the followuing kropki arrangement", full_board_k, "has", num_four_dot_arrangements, "four dot arrangements.")
+#     # Now we have the full count of how many four-dot-arrangements this solution hasL:
+    # print("The current solution,", current_board, "with the followuing kropki arrangement", full_board_k, "has", num_four_dot_arrangements, "four dot arrangements.")
