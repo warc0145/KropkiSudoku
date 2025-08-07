@@ -175,7 +175,8 @@ def find_puzzles(current_board, current_row, current_column):
                         else: # We are at the end of the board!
                             # print("current board", current_board, "is valid. Appending...")
                             
-                            f.write(current_board + "/\n")
+                            f.write(str(current_board))
+                            f.write("\n")
                             
                             # Output to track counting solutions found so far
                             count_lst[0] += 1
@@ -190,6 +191,7 @@ def find_puzzles(current_board, current_row, current_column):
 
 blank_board = [[0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0], [0,0,0,0,0,0]]
 
-# with ("6x6Solutions.txt", "a") as f:
+# with open("AllSolutions6x6.txt", "a") as f:
 #     find_puzzles(blank_board, 0, 0) # Base call to find_puzzles, starting in the (0,0) position with a blank board (all zeroes)
 # print("There are", count_lst[0], "solutions")
+
