@@ -11,7 +11,8 @@ how many 6x6 solutions have a unique Kropki Arrangement, what is the highest and
 and how many puzzles have a given number of circles in a Kropki Arrangement.
 '''
 # from PuzzleGenerator4x4 import solutions, print_board
-
+from LatexPrint6x6 import latex_print, full_color_print
+from Coloring6x6 import colorer_6x6
 # print(solutions)
 
 def find_horizontal_kropki_dots(board):
@@ -201,22 +202,27 @@ def all_kropki_solutions(board_list):
             print_board(board_list[i])
     print("Total non-unique arrangements:", non_unique_count)
 
-solutions = []
-# Now read solutions.txt for first 1000 solutions and last 1000 solutions, and begin making boards
-with open('solutions.txt', 'r') as file:
-    for line in file:
-        solutions.append([]) # Insert a new solution to the solutions
-        # print(line)
-        new_line = ''
-        for char in line:
-            if char in '123456':
-                new_line = new_line + char
-                if len(new_line) == 6: # Then we have a full row for the solution!
-                    solutions[-1].append([])
-                    for num in new_line:
-                        solutions[-1][-1].append(int(num))
-                    new_line = ''
+# solutions = []
+# # Now read solutions.txt for first 1000 solutions and last 1000 solutions, and begin making boards
+# with open('solutions.txt', 'r') as file:
+#     for line in file:
+#         solutions.append([]) # Insert a new solution to the solutions
+#         # print(line)
+#         new_line = ''
+#         for char in line:
+#             if char in '123456':
+#                 new_line = new_line + char
+#                 if len(new_line) == 6: # Then we have a full row for the solution!
+#                     solutions[-1].append([])
+#                     for num in new_line:
+#                         solutions[-1][-1].append(int(num))
+#                     new_line = ''
 
              
-all_kropki_solutions(solutions)
+# all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
+
+sol = [[1, 2, 5, 3, 4, 6], [4, 6, 3, 5, 1, 2], [3, 4, 6, 2, 5, 1], [5, 1, 2, 6, 3, 4], [2, 5, 1, 4, 6, 3], [6, 3, 4, 1, 2, 5]] 
+k_arrange = (find_horizontal_kropki_dots(sol), find_vertical_kropki_dots(sol))
+coloring = colorer_6x6(sol)
+full_color_print(sol, coloring, k_arrange)
