@@ -14,6 +14,7 @@ from SolveWithKropki import kropki_solver
 from AltLatexPrinter import latex_print
 from SudokuPuzzleGenerator4x4 import solutions
 from KropkiGenerator4x4 import kropki_solutions
+from Coloring import colorer
 
 def color_reverser(kropki):
     """
@@ -72,3 +73,6 @@ for sol in fun_solutions:
 #         reversible_boards.append((k_sol, k_copy))
 #         print("board #", i, "has", len(all_solutions), "solutions. Appending... Now there are", len(reversible_boards))
 # print("There are", len(reversible_boards), "reversible boards")
+reversible_solutions = [solutions[item[2]] for item in reversible_boards]
+all_colorings = colorer(reversible_solutions)
+print(all_colorings)
