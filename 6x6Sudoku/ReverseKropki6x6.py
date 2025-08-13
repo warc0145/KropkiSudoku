@@ -174,6 +174,7 @@ def find_puzzles_with_kropki(current_board, current_row, current_column, kropki_
 # line = ""
 print("Opening...")
 with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
+    solution_count_dict = dict() # Keys will be the number of solutions, values will be the number of puzzles that had that many solutions
     line_num = 0
     single_solutions = 0
     multiple_solutions = 0
@@ -214,7 +215,13 @@ with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
         #     print("Solution #", i)
         #     print_board(valid_solutions[i])
 
-        # Currently prints only puzzles with 2+ solutions of the same coloring
+        # Adds to the dictionary the number of solutions the given arrangement had:
+        if len(valid_solutions) is in solution_count_dict:
+            solution_count_dict[len(valid_solutions)] += 1
+        else:
+            solution_count_dict[len(valid_solutions)] = 1
+        
+        # Counts how many Kropki Arrangements have 1 vs multiple solutions
         if (len(valid_solutions) > 1):
             multiple_solutions += 1
             
@@ -222,18 +229,18 @@ with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
             # if len(valid_solutions) > max_solutions:
             #     max_solutions = len(valid_solutions)
 
-            # Count how many solutions have the same coloring as the original board:
-            same_coloring_count = 0
-            same_coloring_lst = []
-            for sol in valid_solutions:
-                current_coloring = colorer_6x6(sol)
-                if current_coloring == original_coloring:
-                    same_coloring_count += 1
-                    same_coloring_lst.append(sol)
-            if same_coloring_count > 1:
-                print("The original solution", starting_solution, "led to", same_coloring_count, "boards with the same coloring.")
-                for sol in same_coloring_lst:
-                    print_board(sol)
+            # # Count how many solutions have the same coloring as the original board:
+            # same_coloring_count = 0
+            # same_coloring_lst = []
+            # for sol in valid_solutions:
+            #     current_coloring = colorer_6x6(sol)
+            #     if current_coloring == original_coloring:
+            #         same_coloring_count += 1
+            #         same_coloring_lst.append(sol)
+            # if same_coloring_count > 1:
+            #     print("The original solution", starting_solution, "led to", same_coloring_count, "boards with the same coloring.")
+            #     for sol in same_coloring_lst:
+            #         print_board(sol)
                 
             # print("Solution number", line_num, "led to", len(valid_solutions), "valid solutions. Printing...")
             # print("Kropki Arrangement:")
@@ -245,6 +252,8 @@ with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
             single_solutions += 1
 
 print("Single solutions:", single_solutions, "; multiple solutions:", multiple_solutions, "total:", (single_solutions + multiple_solutions))
+for key in solution_count_dict.keys():
+    print("Kropki arrangements with", key, "solutions:", solution_count_dict[key])
 
 
 
