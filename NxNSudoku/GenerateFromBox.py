@@ -90,7 +90,7 @@ def box_generator_4x4():
 
 def box_generator_6x6():
     """
-    Generates the kropki arrangements of a single box from the 4x4 grid, report uniqueness
+    Generates the kropki arrangements of a single box from the 6x6 grid, report uniqueness
 
     Using a one dimensional array to represent the following solution, the numbers inside the box represent the index that 
     position will be located at in the list:
@@ -128,7 +128,7 @@ def box_generator_6x6():
 
 def box_generator_9x9():
     """
-    Generates the kropki arrangements of a single box from the 4x4 grid, report uniqueness
+    Generates the kropki arrangements of a single box from the 9x9 grid, report uniqueness
 
     Using a one dimensional array to represent the following solution, the numbers inside the box represent the index that 
     position will be located at in the list:
@@ -237,3 +237,8 @@ for box in boxes_4:
 #         solutions.clear()
 #         partial_sudoku_solver(start_state_6, blank_board_6, 0, 0)
 #         print(len(solutions))
+
+for box in dict_9.keys():
+    if dict_9[box] > 1:
+        print(box, dict_9[box])
+        # break
