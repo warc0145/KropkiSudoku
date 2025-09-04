@@ -222,7 +222,7 @@ def all_kropki_solutions(board_list):
 # all_kropki_solutions(solutions)
 # print(kropki_solutions[3])
 
-sol = [[1, 2, 5, 3, 4, 6], [4, 6, 3, 5, 1, 2], [3, 4, 6, 2, 5, 1], [5, 1, 2, 6, 3, 4], [2, 5, 1, 4, 6, 3], [6, 3, 4, 1, 2, 5]] 
-k_arrange = (find_horizontal_kropki_dots(sol), find_vertical_kropki_dots(sol))
-coloring = colorer_6x6(sol)
-full_color_print(sol, coloring, k_arrange)
+# sol = [[1, 2, 5, 3, 4, 6], [4, 6, 3, 5, 1, 2], [3, 4, 6, 2, 5, 1], [5, 1, 2, 6, 3, 4], [2, 5, 1, 4, 6, 3], [6, 3, 4, 1, 2, 5]] 
+# k_arrange = (find_horizontal_kropki_dots(sol), find_vertical_kropki_dots(sol))
+# coloring = colorer_6x6(sol)
+# full_color_print(sol, coloring, k_arrange)
