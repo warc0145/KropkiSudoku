@@ -14,6 +14,13 @@ from LatexPrint6x6 import latex_print
 from Coloring6x6 import colorer_6x6
 import random
 
+def line_to_board(line):
+    return [[line[2], line[5], line[8], line[11], line[14], line[17]],
+            [line[22], line[25], line[28], line[31], line[34], line[37]],
+            [line[42], line[45], line[48], line[51], line[54], line[57]],
+            [line[62], line[65], line[68], line[71], line[74], line[77]],
+            [line[82], line[85], line[88], line[91], line[94], line[97]],
+            [line[102], line[105], line[108], line[111], line[114], line[117]]]
 
 def find_horizontal_kropki_dots(board):
     '''
@@ -173,7 +180,8 @@ def find_puzzles_with_kropki(current_board, current_row, current_column, kropki_
 # print("Using solution number", solution_num)
 # line = ""
 print("Opening...")
-with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
+# with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
+with open("6x6Sudoku/solutions.txt", 'r') as f:
     solution_count_dict = dict() # Keys will be the number of solutions, values will be the number of puzzles that had that many solutions
     line_num = 0
     single_solutions = 0
@@ -187,12 +195,7 @@ with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
         if line_num % 100000 == 0:
             print(line_num)
         
-        starting_solution = [[line[2], line[5], line[8], line[11], line[14], line[17]],
-                            [line[22], line[25], line[28], line[31], line[34], line[37]],
-                            [line[42], line[45], line[48], line[51], line[54], line[57]],
-                            [line[62], line[65], line[68], line[71], line[74], line[77]],
-                            [line[82], line[85], line[88], line[91], line[94], line[97]],
-                            [line[102], line[105], line[108], line[111], line[114], line[117]]]
+        starting_solution = line_to_board(line)
         # Cast the num strings to integers
         for i in range(len(starting_solution)):
             for j in range(len(starting_solution[i])):
@@ -216,7 +219,7 @@ with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
         #     print_board(valid_solutions[i])
 
         # Adds to the dictionary the number of solutions the given arrangement had:
-        if len(valid_solutions) is in solution_count_dict:
+        if len(valid_solutions) in solution_count_dict:
             solution_count_dict[len(valid_solutions)] += 1
         else:
             solution_count_dict[len(valid_solutions)] = 1
