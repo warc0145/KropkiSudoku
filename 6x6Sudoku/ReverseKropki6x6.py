@@ -1,4 +1,4 @@
-"""
+'''
 Name: Dylan Warcholik
 
 File Name: ReverseKropki6x6.py
@@ -8,13 +8,16 @@ Date Started: 8/6/2025
 Description:
 This file will produce a random 6x6 solution, fill in the dots, erase the numbers, and then find all solutions to that Kropki arrangement.
 The results will be used to check for uniqueness of arrangments.
-"""
+'''
 from PuzzleGenerator6x6 import check_row, check_column, check_box, print_board
 from LatexPrint6x6 import latex_print
 from Coloring6x6 import colorer_6x6
 import random
 
 def line_to_board(line):
+    """
+    Given a line from a file representing a sudoku board, return a list of lists representing a sudoku board.
+    """
     return [[line[2], line[5], line[8], line[11], line[14], line[17]],
             [line[22], line[25], line[28], line[31], line[34], line[37]],
             [line[42], line[45], line[48], line[51], line[54], line[57]],
@@ -23,10 +26,10 @@ def line_to_board(line):
             [line[102], line[105], line[108], line[111], line[114], line[117]]]
 
 def find_horizontal_kropki_dots(board):
-    '''
+    """
     Searches a given board and returns a 6x5 array representing horizontal kropki dot placements (1 for black, -1 for white, 0 for no dot)
     Note, currently the circles between 1 and 2 are always black.
-    '''
+    """
     horizontal_dots = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
 
     for r in range(len(board)):
@@ -40,10 +43,10 @@ def find_horizontal_kropki_dots(board):
     return horizontal_dots
 
 def find_vertical_kropki_dots(board):
-    '''
+    """
     Searches a given board and returns a 5x6 array representing vertical kropki dot placements (1 for black, -1 for white, 0 for no dot)
     Note, currently the circles between 1 and 2 are always black.
-    '''
+    """
     vertical_dots = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]
     for r in range(len(board) - 1):
         for c in range(len(board[r])):
