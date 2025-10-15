@@ -11,6 +11,7 @@ Alternate puzzle style, so that there are three dots with an even number of numb
 0,1,2 represent the dots between two numbers, and each dot reveals the sum of the two digits in mod 3.
 '''
 from PuzzleGenerator6x6 import check_row, check_column, check_box
+from ReverseKropki6x6 import line_to_board
 
 
 def find_horizontal_mod_dots(board):
@@ -139,12 +140,7 @@ with open("6x6Sudoku/solutions.txt", 'r') as f:
             print(line_num)
             print(solution_count_dict)
         
-        starting_solution = [[line[2], line[5], line[8], line[11], line[14], line[17]],
-                            [line[22], line[25], line[28], line[31], line[34], line[37]],
-                            [line[42], line[45], line[48], line[51], line[54], line[57]],
-                            [line[62], line[65], line[68], line[71], line[74], line[77]],
-                            [line[82], line[85], line[88], line[91], line[94], line[97]],
-                            [line[102], line[105], line[108], line[111], line[114], line[117]]]
+        starting_solution = line_to_board(line)
         # Cast the num strings to integers
         for i in range(len(starting_solution)):
             for j in range(len(starting_solution[i])):
