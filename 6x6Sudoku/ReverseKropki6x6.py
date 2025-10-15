@@ -182,85 +182,89 @@ def find_puzzles_with_kropki(current_board, current_row, current_column, kropki_
 # solution_num = random.randint(0,2000)
 # print("Using solution number", solution_num)
 # line = ""
-print("Opening...")
-# with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
-with open("6x6Sudoku/solutions.txt", 'r') as f:
-    solution_count_dict = dict() # Keys will be the number of solutions, values will be the number of puzzles that had that many solutions
-    line_num = 0
-    single_solutions = 0
-    multiple_solutions = 0
-    max_solutions = 0 # Highest number of solutions
-    # print("Starting at line 0...")
-    for line in f:
-        valid_solutions = [] # Reset to no solutions for every line
+def run():
+    """
+    All file readings and printing happen under here. Allows only the call of this function to be commented to stop it from
+    running when methods are imported from this file.
+    """
+    print("Opening...")
+    # with open("6x6Sudoku/AllSolutions6x6.txt", 'r') as f:
+    with open("6x6Sudoku/solutions.txt", 'r') as f:
+        solution_count_dict = dict() # Keys will be the number of solutions, values will be the number of puzzles that had that many solutions
+        line_num = 0
+        single_solutions = 0
+        multiple_solutions = 0
+        max_solutions = 0 # Highest number of solutions
+        # print("Starting at line 0...")
+        for line in f:
+            valid_solutions = [] # Reset to no solutions for every line
 
-        line_num += 1
-        if line_num % 100000 == 0:
-            print(line_num)
-        
-        starting_solution = line_to_board(line)
-        # Cast the num strings to integers
-        for i in range(len(starting_solution)):
-            for j in range(len(starting_solution[i])):
-                starting_solution[i][j] = int(starting_solution[i][j])
-        
-        original_coloring = colorer_6x6(starting_solution)
-
-        blank_board = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0 ,0]]
-
-        h_dots = find_horizontal_kropki_dots(starting_solution)
-        v_dots = find_vertical_kropki_dots(starting_solution)
-
-        all_dots = (h_dots, v_dots)
-        find_puzzles_with_kropki(blank_board, 0, 0, all_dots)
-        
-        # print("Solution number", line_num, "led to", len(valid_solutions), "valid solutions. Printing...")
-        # print("Kropki Arrangement:")
-        # latex_print(all_dots)
-        # for i in range(len(valid_solutions)):
-        #     print("Solution #", i)
-        #     print_board(valid_solutions[i])
-
-        # Adds to the dictionary the number of solutions the given arrangement had:
-        if len(valid_solutions) in solution_count_dict:
-            solution_count_dict[len(valid_solutions)] += 1
-        else:
-            solution_count_dict[len(valid_solutions)] = 1
-        
-        # Counts how many Kropki Arrangements have 1 vs multiple solutions
-        if (len(valid_solutions) > 1):
-            multiple_solutions += 1
+            line_num += 1
+            if line_num % 100000 == 0:
+                print(line_num)
             
-            ## When looking for the highest number of solutions to an arrangement: # Found at least 7 to one, but did not make it through all solutions
-            # if len(valid_solutions) > max_solutions:
-            #     max_solutions = len(valid_solutions)
+            starting_solution = line_to_board(line)
+            # Cast the num strings to integers
+            for i in range(len(starting_solution)):
+                for j in range(len(starting_solution[i])):
+                    starting_solution[i][j] = int(starting_solution[i][j])
+            
+            original_coloring = colorer_6x6(starting_solution)
 
-            # # Count how many solutions have the same coloring as the original board:
-            # same_coloring_count = 0
-            # same_coloring_lst = []
-            # for sol in valid_solutions:
-            #     current_coloring = colorer_6x6(sol)
-            #     if current_coloring == original_coloring:
-            #         same_coloring_count += 1
-            #         same_coloring_lst.append(sol)
-            # if same_coloring_count > 1:
-            #     print("The original solution", starting_solution, "led to", same_coloring_count, "boards with the same coloring.")
-            #     for sol in same_coloring_lst:
-            #         print_board(sol)
-                
+            blank_board = [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0 ,0]]
+
+            h_dots = find_horizontal_kropki_dots(starting_solution)
+            v_dots = find_vertical_kropki_dots(starting_solution)
+
+            all_dots = (h_dots, v_dots)
+            find_puzzles_with_kropki(blank_board, 0, 0, all_dots)
+            
             # print("Solution number", line_num, "led to", len(valid_solutions), "valid solutions. Printing...")
             # print("Kropki Arrangement:")
             # latex_print(all_dots)
             # for i in range(len(valid_solutions)):
             #     print("Solution #", i)
             #     print_board(valid_solutions[i])
-        elif len(valid_solutions) == 1:
-            single_solutions += 1
 
-print("Single solutions:", single_solutions, "; multiple solutions:", multiple_solutions, "total:", (single_solutions + multiple_solutions))
-for key in solution_count_dict.keys():
-    print("Kropki arrangements with", key, "solutions:", solution_count_dict[key])
+            # Adds to the dictionary the number of solutions the given arrangement had:
+            if len(valid_solutions) in solution_count_dict:
+                solution_count_dict[len(valid_solutions)] += 1
+            else:
+                solution_count_dict[len(valid_solutions)] = 1
+            
+            # Counts how many Kropki Arrangements have 1 vs multiple solutions
+            if (len(valid_solutions) > 1):
+                multiple_solutions += 1
+                
+                ## When looking for the highest number of solutions to an arrangement: # Found at least 7 to one, but did not make it through all solutions
+                # if len(valid_solutions) > max_solutions:
+                #     max_solutions = len(valid_solutions)
 
+                # # Count how many solutions have the same coloring as the original board:
+                # same_coloring_count = 0
+                # same_coloring_lst = []
+                # for sol in valid_solutions:
+                #     current_coloring = colorer_6x6(sol)
+                #     if current_coloring == original_coloring:
+                #         same_coloring_count += 1
+                #         same_coloring_lst.append(sol)
+                # if same_coloring_count > 1:
+                #     print("The original solution", starting_solution, "led to", same_coloring_count, "boards with the same coloring.")
+                #     for sol in same_coloring_lst:
+                #         print_board(sol)
+                    
+                # print("Solution number", line_num, "led to", len(valid_solutions), "valid solutions. Printing...")
+                # print("Kropki Arrangement:")
+                # latex_print(all_dots)
+                # for i in range(len(valid_solutions)):
+                #     print("Solution #", i)
+                #     print_board(valid_solutions[i])
+            elif len(valid_solutions) == 1:
+                single_solutions += 1
 
+    print("Single solutions:", single_solutions, "; multiple solutions:", multiple_solutions, "total:", (single_solutions + multiple_solutions))
+    for key in solution_count_dict.keys():
+        print("Kropki arrangements with", key, "solutions:", solution_count_dict[key])
 
 # start_board = [[1, 2, 3, 4, 5, 6], [4, 5, 6, 1, 2, 3], [2, 1, 4, 3, 6, 5], [3, 6, 5, 2, 1, 4], [5, 3, 1, 6, 4, 2], [6, 4, 2, 5, 3, 1]]
+run()
